@@ -14,5 +14,6 @@ import "./index.scss";
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
     </div>
+    <NuxtPage />
   </div>
 </template>
