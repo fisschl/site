@@ -10,16 +10,16 @@
     "@nuxt/devtools": "^0.4.1",
     "@nuxtjs/color-mode": "^3.2.0",
     "@nuxtjs/tailwindcss": "^6.6.6",
+    "@tabler/icons-vue": "^2.16.0",
     "@vueuse/core": "^10.0.2",
     "eslint": "^8.38.0",
-    "nuxt": "^3.4.1",
+    "nuxt": "^3.4.2",
     "postcss-preset-env": "^8.3.2",
     "sass": "^1.62.0"
   },
   "devDependencies": {
     "@element-plus/nuxt": "^1.0.4",
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
-    "@types/node": "^18.15.12",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.7",
