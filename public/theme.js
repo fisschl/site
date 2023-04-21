@@ -1,6 +1,6 @@
 const getColorQuery = () => matchMedia("(prefers-color-scheme: dark)");
 
-export const handleCheckColor = (e) => {
+const handleCheckColor = (e) => {
   if (e.matches) {
     document.documentElement.classList.add("dark");
     document.documentElement.setAttribute("data-bs-theme", "dark");

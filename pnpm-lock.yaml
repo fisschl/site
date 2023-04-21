@@ -4,6 +4,9 @@ dependencies:
   '@nuxt/devtools':
     specifier: ^0.4.1
     version: 0.4.1(nuxt@3.4.1)(rollup@2.79.1)(vite@4.3.0)
+  '@nuxtjs/color-mode':
+    specifier: ^3.2.0
+    version: 3.2.0(rollup@2.79.1)
   '@nuxtjs/tailwindcss':
     specifier: ^6.6.6
     version: 6.6.6(rollup@2.79.1)(webpack@5.80.0)
@@ -39,6 +42,9 @@ devDependencies:
   '@nuxtjs/eslint-config-typescript':
     specifier: ^12.0.0
     version: 12.0.0(eslint@8.38.0)(typescript@5.0.4)
+  '@types/bootstrap':
+    specifier: ^5.2.6
+    version: 5.2.6
   '@types/node':
     specifier: ^18.15.12
     version: 18.15.12
@@ -2300,6 +2306,17 @@ packages:
       - vue-tsc
     dev: false
 
+  /@nuxtjs/color-mode@3.2.0(rollup@2.79.1):
+    resolution: {integrity: sha512-isDR01yfadopiHQ/VEVUpyNSPrk5PCjUHS4t1qYRZwuRGefU4s9Iaxf6H9nmr1QFzoMgTm+3T0r/54jLwtpZbA==}
+    dependencies:
+      '@nuxt/kit': 3.4.1(rollup@2.79.1)
+      lodash.template: 4.5.0
+      pathe: 1.1.0
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+    dev: false
+
   /@nuxtjs/eslint-config-typescript@12.0.0(eslint@8.38.0)(typescript@5.0.4):
     resolution: {integrity: sha512-HJR0ho5MYuOCFjkL+eMX/VXbUwy36J12DUMVy+dj3Qz1GYHwX92Saxap3urFzr8oPkzzFiuOknDivfCeRBWakg==}
     peerDependencies:
@@ -2388,7 +2405,6 @@ packages:
 
   /@popperjs/core@2.11.7:
     resolution: {integrity: sha512-Cr4OjIkipTtcXKjAsm8agyleBuDHvxzeBoa1v543lbv1YaIwQjESsVcmjiWiPEbC1FIeHOG/Op9kdCmAmiS3Kw==}
-    dev: false
 
   /@rollup/plugin-alias@5.0.0(rollup@3.20.6):
     resolution: {integrity: sha512-l9hY5chSCjuFRPsnRm16twWBiSApl2uYFLsepQYwtBuAxNMQ/1dJqADld40P0Jkqm65GRTLy/AC6hnpVebtLsA==}
@@ -2664,6 +2680,12 @@ packages:
       '@tufjs/canonical-json': 1.0.0
       minimatch: 7.4.6
     dev: false
+
+  /@types/bootstrap@5.2.6:
+    resolution: {integrity: sha512-BlAc3YATdasbHoxMoBWODrSF6qwQO/E9X8wVxCCSa6rWjnaZfpkr2N6pUMCY6jj2+wf0muUtLySbvU9etX6YqA==}
+    dependencies:
+      '@popperjs/core': 2.11.7
+    dev: true
 
   /@types/eslint-scope@3.7.4:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
