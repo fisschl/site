@@ -12,6 +12,7 @@
     "@nuxtjs/tailwindcss": "^6.6.6",
     "@tabler/icons-vue": "^2.16.0",
     "@vueuse/core": "^10.0.2",
+    "date-fns": "^2.29.3",
     "eslint": "^8.38.0",
     "nuxt": "^3.4.2",
     "postcss-preset-env": "^8.3.2",
@@ -36,7 +37,8 @@
       "plugin:prettier/recommended"
     ],
     "rules": {
-      "vue/no-multiple-template-root": "off"
+      "vue/no-multiple-template-root": "off",
+      "import/no-duplicates": "off"
     }
   }
 }

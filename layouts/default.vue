@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { IconApps } from "@tabler/icons-vue";
+useFetchUser();
 </script>
 
 <template>
