@@ -89,7 +89,7 @@ watchDebounced(formData, refresh, { deep: true, debounce: 500 });
       <ElLink :href="item.url" target="_blank" rel="noopener noreferrer">
         {{ item.title }}
       </ElLink>
-      <ElTag class="mr-2">
+      <ElTag class="ml-2">
         {{ item.type }}
       </ElTag>
     </ElTimelineItem>

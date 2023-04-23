@@ -67,23 +67,13 @@ export const useFetchUser = () => {
       localStorage.setItem("user-state", JSON.stringify(user.value));
     }
   );
+  return user;
 };
 
 export const fetchLogin = () => {
   const url = new URL(LOGIN_URL);
   url.searchParams.set("from", window.location.href);
   window.location.href = url.toString();
-};
-
-export const useLogout = () => {
-  const user = useUserState();
-  return () => {
-    localStorage.removeItem("token");
-    user.value.isLogin = false;
-    const url = new URL(LOGOUT_URL);
-    url.searchParams.set("from", window.location.href);
-    window.location.href = url.toString();
-  };
 };
 
 /**
