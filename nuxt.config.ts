@@ -20,4 +20,7 @@ export default defineNuxtConfig({
   colorMode: {
     classSuffix: "",
   },
+  elementPlus: {
+    themes: ["dark"],
+  },
 });

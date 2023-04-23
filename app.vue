@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import "element-plus/theme-chalk/dark/css-vars.css";
+import "dayjs/locale/zh-cn";
+// @ts-ignore
+import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 </script>
 
 <template>
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+  <ElConfigProvider :locale="zhCn">
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </ElConfigProvider>
 </template>
 
 <style>

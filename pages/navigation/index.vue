@@ -6,9 +6,15 @@ const menuList = useMenuList();
 
 <template>
   <ElBreadcrumb class="mx-4 mb-3">
+    <ElBreadcrumbItem to="/">首页</ElBreadcrumbItem>
     <ElBreadcrumbItem>导航管理</ElBreadcrumbItem>
   </ElBreadcrumb>
-  <div class="overflow-x-auto p-2">
+  <div class="flex justify-end gap-2 px-4 py-2">
+    <NuxtLink to="/navigation/edit">
+      <ElButton type="primary" plain style="width: 5rem"> 新增 </ElButton>
+    </NuxtLink>
+  </div>
+  <div class="overflow-x-auto px-2 pb-6">
     <ElTable style="min-width: 50rem" :data="menuList">
       <ElTableColumn
         show-overflow-tooltip
@@ -36,7 +42,7 @@ const menuList = useMenuList();
       </ElTableColumn>
       <ElTableColumn width="60" label="图标">
         <template #default="{ row }">
-          <i class="text-xl" :class="iconClass(row.icon)" />
+          <i class="text-lg" :class="iconClass(row.icon)" />
         </template>
       </ElTableColumn>
       <ElTableColumn width="70" label="公开">

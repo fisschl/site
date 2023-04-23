@@ -45,14 +45,14 @@ onClickOutside(header, () => {
 </script>
 
 <template>
-  <header ref="header" class="sticky top-0 z-20 p-3" style="height: 4rem">
+  <header ref="header" class="sticky top-0 z-20 p-3" style="height: 4.5rem">
     <nav class="nav rounded-lg bg-white/20 backdrop-blur dark:bg-black/20">
-      <div style="height: 2.5rem" class="flex items-center py-1">
+      <div style="height: 3rem" class="flex items-center py-1">
         <ElButton
           title="导航"
           text
           circle
-          class="mx-2 !h-auto !p-[5px]"
+          class="mx-2 !h-auto"
           @click="isNavVisible = !isNavVisible"
         >
           <IconApps :size="20" />
@@ -62,7 +62,7 @@ onClickOutside(header, () => {
           text
           title="登录"
           circle
-          class="mx-2 !h-auto !p-[5px]"
+          class="mx-2 !h-auto"
           @click="handleClickLogin"
         >
           <IconUserUp v-if="!user.isLogin" :size="20" />
@@ -78,17 +78,20 @@ onClickOutside(header, () => {
             <a
               :href="item.url"
               :title="item.title"
-              class="link flex items-center gap-2 rounded-md px-3 py-1 transition hover:ring"
+              class="flex items-center gap-2 rounded-md px-3 py-1 transition hover:ring"
             >
               <i class="text-lg" :class="iconClass(item.icon)" />
               <span>{{ item.title }}</span>
             </a>
           </li>
           <li class="flex items-center">
-            <NuxtLink to="/navigation">
-              <ElButton link type="info" title="编辑">
-                <IconEdit :size="20" />
-              </ElButton>
+            <NuxtLink
+              to="/navigation"
+              class="rounded-md px-3 py-1 hover:ring"
+              title="编辑"
+              @click="isNavVisible = false"
+            >
+              <IconEdit :size="20" />
             </NuxtLink>
           </li>
         </ul>

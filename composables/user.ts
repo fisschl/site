@@ -53,13 +53,18 @@ export const useFetchUser = () => {
       token = localStorage.getItem("token") || undefined;
     }
     if (!token) return;
-    return request<UserItem>("/user").then((res) => {
-      user.value = {
-        ...user.value,
-        ...res,
-        isLogin: true,
-      };
-    });
+    return request<UserItem>("/user")
+      .then((res) => {
+        user.value = {
+          ...user.value,
+          ...res,
+          isLogin: true,
+        };
+      })
+      .catch(() => {
+        localStorage.removeItem("token");
+        user.value.isLogin = false;
+      });
   });
   watch(
     () => user.value.isLogin,
