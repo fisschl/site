@@ -1,3 +1,5 @@
+import { ofetch } from "ofetch";
+
 export interface UserItem {
   id: string;
   image: string;
@@ -10,7 +12,6 @@ export const useUserState = () =>
   useState<
     Partial<UserItem> & {
       isLogin: boolean;
-      token?: string;
     }
   >("user", () => ({
     isLogin: false,
@@ -25,32 +26,47 @@ export const HOST = "https://fisschl.world/api";
 export const LOGIN_URL = HOST + "/login";
 export const LOGOUT_URL = HOST + "/logout";
 
-export const useRequest: typeof useFetch = (request, opts) => {
-  return useFetch(request, {
-    baseURL: HOST,
-    onRequest({ options }) {
-      if (typeof window === "undefined") return;
-      options.headers ||= {};
-      const headers: any = options.headers;
-      const token = localStorage.getItem("token");
-      headers.Authorization = token;
-    },
-    ...opts,
-  });
-};
+export const request = ofetch.create({
+  baseURL: HOST,
+  onRequest({ options }) {
+    if (typeof window === "undefined") return;
+    options.headers ||= {};
+    const headers: any = options.headers;
+    const token = localStorage.getItem("token");
+    headers.Authorization = token;
+  },
+});
 
 export const useFetchUser = () => {
   const user = useUserState();
-  useRequest<UserItem>("/user", {
-    server: false,
-  }).then(({ data }) => {
-    if (!data.value) return;
-    user.value = {
-      ...user.value,
-      ...data.value,
-      isLogin: true,
-    };
+  onMounted(() => {
+    const data = localStorage.getItem("user-state");
+    if (data) user.value = JSON.parse(data);
+    const url = new URL(window.location.href);
+    const params = url.searchParams;
+    let token = params.get("token") || undefined;
+    if (token) {
+      params.delete("token");
+      localStorage.setItem("token", token);
+      history.replaceState({}, "", url);
+    } else {
+      token = localStorage.getItem("token") || undefined;
+    }
+    if (!token) return;
+    return request<UserItem>("/user").then((res) => {
+      user.value = {
+        ...user.value,
+        ...res,
+        isLogin: true,
+      };
+    });
   });
+  watch(
+    () => user.value.isLogin,
+    () => {
+      localStorage.setItem("user-state", JSON.stringify(user.value));
+    }
+  );
 };
 
 export const fetchLogin = () => {
@@ -59,12 +75,15 @@ export const fetchLogin = () => {
   window.location.href = url.toString();
 };
 
-export const fetchLogout = () => {
-  UserState.value.token = undefined;
-  UserState.value.isLogin = false;
-  const url = new URL(LOGOUT_URL);
-  url.searchParams.set("from", window.location.href);
-  window.location.href = url.toString();
+export const useLogout = () => {
+  const user = useUserState();
+  return () => {
+    localStorage.removeItem("token");
+    user.value.isLogin = false;
+    const url = new URL(LOGOUT_URL);
+    url.searchParams.set("from", window.location.href);
+    window.location.href = url.toString();
+  };
 };
 
 /**

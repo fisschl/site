@@ -1,18 +1,31 @@
 <script setup lang="ts">
-import { IconApps } from "@tabler/icons-vue";
+import { IconApps, IconLogin } from "@tabler/icons-vue";
 useFetchUser();
 </script>
 
 <template>
-  <nav
-    class="sticky top-3 z-10 m-3 flex items-center overflow-hidden rounded-lg bg-white/20 px-4 py-3 backdrop-blur dark:bg-black/20"
-  >
-    <h1 class="flex-1 text-center text-lg">大道之行也 天下为公</h1>
-    <ElButton text round class="mr-2">
+  <nav class="nav rounded-lg bg-white/20 py-1 backdrop-blur dark:bg-black/20">
+    <ElButton text circle class="mx-2 !h-auto">
       <IconApps :size="22" />
+    </ElButton>
+    <h1 class="flex-1 text-center text-lg">大道之行也 天下为公</h1>
+    <ElButton text circle class="mx-2 !h-auto" @click="fetchLogin">
+      <IconLogin :size="22" />
     </ElButton>
   </nav>
   <main>
     <slot />
   </main>
 </template>
+
+<style scoped>
+.nav {
+  position: sticky;
+  z-index: 20;
+  top: 1rem;
+  margin: 1rem;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+</style>
