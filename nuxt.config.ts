@@ -4,6 +4,7 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "@nuxt/devtools",
     "@nuxtjs/color-mode",
+    "@vueuse/nuxt",
     "@element-plus/nuxt",
   ],
   app: {

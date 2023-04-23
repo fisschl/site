@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useElementSize } from "@vueuse/core";
 import type { ElCarousel } from "element-plus";
 
 const carousel = ref<InstanceType<typeof ElCarousel>>();

@@ -84,11 +84,9 @@ const remove = () =>
     <ElFormItem prop="url" label="链接">
       <ElInput v-model="item.url" style="max-width: 30rem" />
     </ElFormItem>
-    <ClientOnly>
-      <ElFormItem prop="sort" label="顺序">
-        <ElInputNumber v-model="item.sort" />
-      </ElFormItem>
-    </ClientOnly>
+    <ElFormItem prop="sort" label="顺序">
+      <ElInputNumber v-model="item.sort" />
+    </ElFormItem>
     <ElFormItem prop="visible" label="可见性">
       <ElSwitch
         v-model="item.visible"

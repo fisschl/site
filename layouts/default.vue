@@ -1,7 +1,6 @@
 <script lang="ts">
 import { IconEdit } from "@tabler/icons-vue";
 import { IconApps, IconBrandGithub, IconUserUp } from "@tabler/icons-vue";
-import { onClickOutside } from "@vueuse/core";
 
 export interface MenuItem {
   id: string;
