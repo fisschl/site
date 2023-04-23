@@ -1,4 +1,5 @@
 export default defineNuxtConfig({
+  css: ["@tabler/icons-webfont/tabler-icons.css"],
   modules: [
     "@nuxtjs/tailwindcss",
     "@nuxt/devtools",

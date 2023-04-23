@@ -2,6 +2,7 @@
 import { useElementVisibility, watchDebounced } from "@vueuse/core";
 import { formatDistanceToNowStrict, parseJSON } from "date-fns";
 import zhCN from "date-fns/locale/zh-CN";
+import type { ElSkeleton } from "element-plus";
 import { Page } from "~/composables/user";
 
 interface TopSearchItem {
@@ -44,8 +45,8 @@ const { refresh, data } = useAsyncData(() => {
   return fetchData();
 });
 
-const loadingBox = ref<HTMLElement | null>(null);
-const loadingVisible = useElementVisibility(loadingBox);
+const loadingBox = ref<InstanceType<typeof ElSkeleton> | null>(null);
+const loadingVisible = useElementVisibility(() => loadingBox.value?.$el);
 watch(loadingVisible, (visible) => {
   if (!visible) return;
   fetchData().then((res) => {
@@ -57,7 +58,7 @@ watchDebounced(formData, refresh, { deep: true, debounce: 500 });
 </script>
 
 <template>
-  <form class="mb-4 mt-6 flex flex-wrap gap-2 px-2">
+  <form class="mb-4 mt-6 flex flex-wrap justify-end gap-2 px-4">
     <ElInput
       v-model="formData.title"
       placeholder="标题"
@@ -89,12 +90,12 @@ watchDebounced(formData, refresh, { deep: true, debounce: 500 });
       <ElLink :href="item.url" target="_blank" rel="noopener noreferrer">
         {{ item.title }}
       </ElLink>
-      <ElTag class="ml-2">
+      <ElTag class="ml-2" type="info">
         {{ item.type }}
       </ElTag>
     </ElTimelineItem>
   </ElTimeline>
-  <div ref="loadingBox">loading</div>
+  <ElSkeleton ref="loadingBox" class="px-4 pb-5" :rows="10" animated />
 </template>
 
 <style scoped></style>

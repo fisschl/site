@@ -17,7 +17,12 @@ const controlData = [
 </script>
 
 <template>
-  <ElCarousel ref="carousel" :autoplay="false" :height="height">
+  <ElCarousel
+    ref="carousel"
+    class="m-2 rounded-md"
+    :autoplay="false"
+    :height="height"
+  >
     <ElCarouselItem v-for="item in controlData" :key="item.url">
       <img :src="item.url" :alt="item.url" />
     </ElCarouselItem>
