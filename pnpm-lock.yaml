@@ -19,9 +19,6 @@ dependencies:
   '@tabler/icons-vue':
     specifier: ^2.17.0
     version: 2.17.0(vue@3.2.47)
-  '@tabler/icons-webfont':
-    specifier: ^2.17.0
-    version: 2.17.0
   '@vueuse/core':
     specifier: ^10.1.0
     version: 10.1.0(vue@3.2.47)
@@ -1739,12 +1736,6 @@ packages:
     dependencies:
       '@tabler/icons': 2.17.0
       vue: 3.2.47
-    dev: false
-
-  /@tabler/icons-webfont@2.17.0:
-    resolution: {integrity: sha512-jgRZWiWCaG++jFTIU/dbOT+JmSgoFlALwBUUS31mt1b5py7B0YWelnfxf5s3ctE+0dlnoIS+r7rDOeDSAWx8SA==}
-    dependencies:
-      '@tabler/icons': 2.17.0
     dev: false
 
   /@tabler/icons@2.17.0:

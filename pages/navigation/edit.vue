@@ -20,7 +20,6 @@ watchEffect(() => {
 const rules = {
   title: [{ required: true, message: "请输入标题" }],
   url: [{ required: true, message: "请输入链接" }],
-  icon: [{ required: true, message: "请输入图标" }],
 };
 
 const form = ref<FormInstance>();
@@ -88,13 +87,6 @@ const remove = () =>
         active-text="可见"
         inactive-text="隐藏"
       />
-    </ElFormItem>
-    <ElFormItem prop="icon" label="图标">
-      <ElInput v-model="item.icon" style="max-width: 15rem">
-        <template #suffix>
-          <i class="ml-2 text-xl" :class="iconClass(item.icon)" />
-        </template>
-      </ElInput>
     </ElFormItem>
     <ElFormItem prop="public" label="权限">
       <ElSwitch v-model="item.public" active-text="公开" inactive-text="私有" />

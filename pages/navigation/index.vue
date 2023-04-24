@@ -38,11 +38,6 @@ const menu = useMenuStore();
           <ElTag v-else type="danger">隐藏</ElTag>
         </template>
       </ElTableColumn>
-      <ElTableColumn width="60" label="图标">
-        <template #default="{ row }">
-          <i class="text-lg" :class="iconClass(row.icon)" />
-        </template>
-      </ElTableColumn>
       <ElTableColumn width="70" label="公开">
         <template #default="{ row }">
           <ElTag v-if="row.public">公开</ElTag>

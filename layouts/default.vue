@@ -3,7 +3,7 @@ import {
   IconApps,
   IconBrandGithub,
   IconEdit,
-  IconUserUp,
+  IconUserUp
 } from "@tabler/icons-vue";
 
 const store = useFetchUser();
@@ -55,10 +55,9 @@ onClickOutside(header, () => {
             <a
               :href="item.url"
               :title="item.title"
-              class="flex items-center gap-2 rounded-md px-3 py-1 transition hover:ring"
+              class="rounded-md px-3 py-1 transition hover:ring"
             >
-              <i class="text-lg" :class="iconClass(item.icon)" />
-              <span>{{ item.title }}</span>
+              {{ item.title }}
             </a>
           </li>
           <li class="flex items-center" v-if="store.isLogin">
@@ -83,9 +82,10 @@ onClickOutside(header, () => {
 
 <style scoped>
 .nav {
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2) inset;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2) inset;
 }
+
 :root.dark .nav {
-  box-shadow: 0 0 2px rgba(255, 255, 255, 0.2) inset;
+    box-shadow: 0 0 2px rgba(255, 255, 255, 0.2) inset;
 }
 </style>

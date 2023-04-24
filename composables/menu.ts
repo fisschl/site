@@ -6,7 +6,6 @@ export interface MenuItem {
   url: string;
   visible: boolean;
   public: boolean;
-  icon: string;
   sort: number;
 }
 
