@@ -24,7 +24,7 @@ const formData = ref<Partial<TopSearchItem>>({});
 
 const fetchData = () =>
   request<TopSearchResponse>("/top-search", {
-    query: { current: page.value++, size: 20, ...formData.value },
+    query: { page: page.value++, size: 20, ...formData.value },
   }).then((res) =>
     res.list.map((item) => {
       item.update_time = formatTime(item.update_time);

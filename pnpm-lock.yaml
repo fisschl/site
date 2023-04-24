@@ -49,6 +49,9 @@ dependencies:
   sass:
     specifier: ^1.62.0
     version: 1.62.0
+  typescript:
+    specifier: ^5.0.4
+    version: 5.0.4
 
 devDependencies:
   '@nuxtjs/eslint-config-typescript':
