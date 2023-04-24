@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { iconClass, useMenuList } from "~/layouts/default.vue";
-
-const menuList = useMenuList();
+const menu = useMenuStore();
 </script>
 
 <template>
@@ -15,7 +13,7 @@ const menuList = useMenuList();
     </NuxtLink>
   </div>
   <div class="overflow-x-auto px-2 pb-6">
-    <ElTable style="min-width: 50rem" :data="menuList">
+    <ElTable style="min-width: 50rem" :data="menu.menus">
       <ElTableColumn
         show-overflow-tooltip
         prop="title"
@@ -48,7 +46,7 @@ const menuList = useMenuList();
       <ElTableColumn width="70" label="公开">
         <template #default="{ row }">
           <ElTag v-if="row.public">公开</ElTag>
-          <ElTag v-else type="danger">私有</ElTag>
+          <ElTag v-else type="warning">私有</ElTag>
         </template>
       </ElTableColumn>
       <ElTableColumn width="60" label="操作">

@@ -5,6 +5,7 @@ export default defineNuxtConfig({
     "@nuxt/devtools",
     "@nuxtjs/color-mode",
     "@vueuse/nuxt",
+    "@pinia/nuxt",
     "@element-plus/nuxt",
   ],
   app: {

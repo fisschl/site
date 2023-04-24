@@ -1,22 +1,17 @@
 <script setup lang="ts">
 import type { FormInstance } from "element-plus";
-import {
-  MenuItem,
-  iconClass,
-  refreshMenuList,
-  useMenuList,
-} from "~/layouts/default.vue";
+import { MenuItem } from "~/composables/menu";
 
 const item = ref<Partial<MenuItem>>({});
 
 const route = useRoute();
-const menuList = useMenuList();
+const menu = useMenuStore();
 const router = useRouter();
 const isCreate = computed(() => !route.query.id);
 
 watchEffect(() => {
   if (isCreate.value) return;
-  const value = menuList.value.find((item) => item.id === route.query.id);
+  const value = menu.menus.find((item) => item.id === route.query.id);
   if (!value) return router.replace("/navigation");
   value.sort ||= 0;
   item.value = JSON.parse(JSON.stringify(value));
@@ -36,7 +31,7 @@ const check = () =>
   });
 
 const refreshReturn = () => {
-  refreshMenuList.value();
+  menu.refresh();
   return router.replace("/navigation");
 };
 

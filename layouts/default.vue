@@ -1,39 +1,17 @@
-<script lang="ts">
-import { IconEdit } from "@tabler/icons-vue";
-import { IconApps, IconBrandGithub, IconUserUp } from "@tabler/icons-vue";
-
-export interface MenuItem {
-  id: string;
-  title: string;
-  url: string;
-  visible: boolean;
-  public: boolean;
-  icon: string;
-  sort: number;
-}
-export const iconClass = (icon?: string) => ` ti ti-${icon} `;
-export const fetchMenuList = () => request<MenuItem[]>("/navigation");
-export const useMenuList = () => useState<MenuItem[]>("menu-list", () => []);
-export const refreshMenuList = ref(() => {});
-</script>
-
 <script setup lang="ts">
-const user = useFetchUser();
+import {
+  IconApps,
+  IconBrandGithub,
+  IconEdit,
+  IconUserUp,
+} from "@tabler/icons-vue";
+
+const store = useFetchUser();
 const handleClickLogin = () => {
-  user.value.isLogin ? window.open("https://github.com") : fetchLogin();
+  store.isLogin ? window.open("https://github.com") : fetchLogin();
 };
 const isNavVisible = ref(false);
-const menuList = useMenuList();
-const { refresh } = useLazyAsyncData(
-  () =>
-    fetchMenuList().then((res) => {
-      menuList.value = res;
-    }),
-  {
-    watch: [() => user.value.isLogin],
-  }
-);
-refreshMenuList.value = refresh;
+const menu = useMenuStore();
 
 const header = ref<HTMLHeadElement | null>(null);
 
@@ -59,21 +37,21 @@ onClickOutside(header, () => {
         <h1 class="flex-1 text-center text-base">大道之行也 天下为公</h1>
         <ElButton
           text
-          title="登录"
+          :title="store.isLogin ? 'Github' : '登录'"
           circle
           class="mx-2 !h-auto"
           @click="handleClickLogin"
         >
-          <IconUserUp v-if="!user.isLogin" :size="20" />
-          <IconBrandGithub v-if="user.isLogin" :size="20" />
+          <IconUserUp v-if="!store.isLogin" :size="20" />
+          <IconBrandGithub v-if="store.isLogin" :size="20" />
         </ElButton>
       </div>
-      <ElCollapseTransition>
+      <ElCollapseTransition :duration="200">
         <ul
           v-if="isNavVisible"
           class="mx-6 flex flex-wrap items-center gap-4 pb-4 pt-2"
         >
-          <li v-for="item in menuList" :key="item.id">
+          <li v-for="item in menu.menus" :key="item.id">
             <a
               :href="item.url"
               :title="item.title"
@@ -83,7 +61,7 @@ onClickOutside(header, () => {
               <span>{{ item.title }}</span>
             </a>
           </li>
-          <li class="flex items-center">
+          <li class="flex items-center" v-if="store.isLogin">
             <NuxtLink
               to="/navigation"
               class="rounded-md px-3 py-1 hover:ring"

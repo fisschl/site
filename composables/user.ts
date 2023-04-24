@@ -1,4 +1,5 @@
 import { ofetch } from "ofetch";
+import { defineStore } from "pinia";
 
 export interface UserItem {
   id: string;
@@ -8,19 +9,16 @@ export interface UserItem {
   authority?: string;
 }
 
-export const useUserState = () =>
-  useState<
-    Partial<UserItem> & {
-      isLogin: boolean;
-    }
-  >("user", () => ({
+export const useUserStore = defineStore("user", () => {
+  const user = ref<Partial<UserItem> & { isLogin: boolean }>({
     isLogin: false,
-  }));
-
-export const useIsLogin = () => {
-  const state = useUserState();
-  return computed(() => state.value.isLogin);
-};
+  });
+  const isLogin = computed(() => user.value.isLogin);
+  return {
+    user,
+    isLogin,
+  };
+});
 
 export const HOST = "https://fisschl.world/api";
 export const LOGIN_URL = HOST + "/login";
@@ -38,10 +36,10 @@ export const request = ofetch.create({
 });
 
 export const useFetchUser = () => {
-  const user = useUserState();
+  const store = useUserStore();
   onMounted(() => {
     const data = localStorage.getItem("user-state");
-    if (data) user.value = JSON.parse(data);
+    if (data) store.user = JSON.parse(data);
     const url = new URL(window.location.href);
     const params = url.searchParams;
     let token = params.get("token") || undefined;
@@ -55,24 +53,23 @@ export const useFetchUser = () => {
     if (!token) return;
     return request<UserItem>("/user")
       .then((res) => {
-        user.value = {
-          ...user.value,
+        store.user = {
           ...res,
           isLogin: true,
         };
       })
       .catch(() => {
         localStorage.removeItem("token");
-        user.value.isLogin = false;
+        store.user.isLogin = false;
       });
   });
   watch(
-    () => user.value.isLogin,
+    () => store.user.isLogin,
     () => {
-      localStorage.setItem("user-state", JSON.stringify(user.value));
+      localStorage.setItem("user-state", JSON.stringify(store.user));
     }
   );
-  return user;
+  return store;
 };
 
 export const fetchLogin = () => {
