@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { ElSkeleton } from "element-plus";
 import { Page } from "~/composables/user";
-import { formatTime } from "~/utils/date";
 
 interface TopSearchItem {
   id: string;
@@ -27,7 +26,7 @@ const fetchData = () =>
     query: { page: page.value++, size: 20, ...formData.value },
   }).then((res) =>
     res.list.map((item) => {
-      item.update_time = formatTime(item.update_time);
+      item.update_time = formatShowTime(item.update_time);
       return item;
     })
   );
