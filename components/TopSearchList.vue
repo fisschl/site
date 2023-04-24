@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { formatDistanceToNowStrict, parseJSON } from "date-fns";
-import zhCN from "date-fns/locale/zh-CN";
 import type { ElSkeleton } from "element-plus";
 import { Page } from "~/composables/user";
+import { formatTime } from "~/utils/date";
 
 interface TopSearchItem {
   id: string;
@@ -15,12 +14,6 @@ interface TopSearchItem {
 interface TopSearchResponse extends Required<Page> {
   list: TopSearchItem[];
 }
-
-const formatTime = (time: string) =>
-  formatDistanceToNowStrict(parseJSON(time), {
-    addSuffix: true,
-    locale: zhCN,
-  });
 
 const { data: topSearchType } = useAsyncData(() =>
   request<string[]>("/top-search-type")
