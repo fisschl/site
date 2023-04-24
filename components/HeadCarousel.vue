@@ -6,12 +6,8 @@ const { width } = useElementSize(() => carousel.value?.$el);
 const height = computed(() => width.value * (9 / 16) + "px");
 
 const controlData = [
-  {
-    url: "https://tenapi.cn/v2/bing",
-  },
-  {
-    url: "https://tenapi.cn/v2/acg",
-  },
+  { url: "https://tenapi.cn/v2/bing" },
+  { url: "https://tenapi.cn/v2/acg" },
 ];
 </script>
 
