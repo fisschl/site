@@ -49,7 +49,9 @@ watchDebounced(formData, refresh, { deep: true, debounce: 500 });
 </script>
 
 <template>
-  <form class="mb-4 mt-6 flex flex-wrap justify-end gap-2 px-4">
+  <form
+    class="mx-auto mb-4 mt-6 flex max-w-4xl flex-wrap justify-end gap-2 px-4"
+  >
     <ElInput
       v-model="formData.title"
       placeholder="标题"
@@ -72,7 +74,7 @@ watchDebounced(formData, refresh, { deep: true, debounce: 500 });
       </ElSelect>
     </ClientOnly>
   </form>
-  <ElTimeline class="!mx-3">
+  <ElTimeline class="!mx-auto max-w-4xl !px-3">
     <ElTimelineItem
       v-for="item in data"
       :key="item.id"
