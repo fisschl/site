@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <JinRiShiCi />
-  <HeadCarousel />
+  <JinRiShiCi class="my-10" />
+  <HeadCarousel class="my-10" />
   <TopSearchList />
 </template>

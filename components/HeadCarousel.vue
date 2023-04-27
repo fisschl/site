@@ -12,7 +12,7 @@ const controlData = [
 </script>
 
 <template>
-  <section class="mx-auto my-2 max-w-3xl px-2">
+  <section class="mx-auto max-w-3xl px-4">
     <ElCarousel
       ref="carousel"
       class="rounded-md"

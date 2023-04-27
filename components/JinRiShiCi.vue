@@ -1,8 +1,7 @@
 <script setup lang="ts">
-const id = "#jinrishici-script";
+const id = "jinrishici-script";
 onMounted(() => {
-  const ele = document.querySelector(id);
-  if (ele) ele.remove();
+  document.getElementById(id)?.remove();
   const script = document.createElement("script");
   script.src = "https://sdk.jinrishici.com/v2/browser/jinrishici.js";
   script.id = id;
@@ -11,5 +10,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <p class="jinrishici-sentence mb-4 mt-2 text-center"></p>
+  <p class="jinrishici-sentence text-center"></p>
 </template>

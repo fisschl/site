@@ -13,11 +13,6 @@ export default defineNuxtConfig({
       meta: [{ name: "description", content: "My amazing site." }],
     },
   },
-  postcss: {
-    plugins: {
-      "postcss-preset-env": {},
-    },
-  },
   colorMode: {
     classSuffix: "",
   },
