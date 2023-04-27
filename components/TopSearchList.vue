@@ -90,7 +90,12 @@ watchDebounced(formData, refresh, { deep: true, debounce: 500 });
       </ElLink>
     </ElTimelineItem>
   </ElTimeline>
-  <ElSkeleton ref="loadingBox" class="px-4 pb-5" :rows="10" animated />
+  <ElSkeleton
+    ref="loadingBox"
+    class="max-w-4xl px-4 pb-5"
+    :rows="10"
+    animated
+  />
 </template>
 
 <style scoped></style>
