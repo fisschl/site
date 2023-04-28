@@ -92,7 +92,7 @@ watchDebounced(formData, refresh, { deep: true, debounce: 500 });
   </ElTimeline>
   <ElSkeleton
     ref="loadingBox"
-    class="max-w-4xl px-4 pb-5"
+    class="mx-auto max-w-4xl px-4 pb-5"
     :rows="10"
     animated
   />
