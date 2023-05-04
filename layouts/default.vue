@@ -2,9 +2,8 @@
 import { IconApps, IconBrandGithub, IconUserUp } from "@tabler/icons-vue";
 
 const store = useFetchUser();
-const handleClickLogin = () => {
-  store.isLogin ? window.open("https://github.com") : fetchLogin();
-};
+const handleClickLogin = () =>
+  store.isLogin ? (location.href = "https://github.com") : fetchLogin();
 const isNavVisible = ref(false);
 
 const handleOpenNav = () => (isNavVisible.value = !isNavVisible.value);
