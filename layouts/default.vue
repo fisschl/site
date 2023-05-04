@@ -1,21 +1,13 @@
 <script setup lang="ts">
-import {
-  IconApps,
-  IconBrandGithub,
-  IconEdit,
-  IconUserUp,
-} from "@tabler/icons-vue";
+import { IconApps, IconBrandGithub, IconUserUp } from "@tabler/icons-vue";
 
 const store = useFetchUser();
 const handleClickLogin = () => {
   store.isLogin ? window.open("https://github.com") : fetchLogin();
 };
 const isNavVisible = ref(false);
-const menu = useMenuStore();
 
-const navList = ref<HTMLElement | null>(null);
-onClickOutside(navList, () => (isNavVisible.value = false), { capture: false });
-const handleOpenNav = () => (isNavVisible.value = true);
+const handleOpenNav = () => (isNavVisible.value = !isNavVisible.value);
 </script>
 
 <template>
@@ -44,33 +36,7 @@ const handleOpenNav = () => (isNavVisible.value = true);
       <IconBrandGithub v-if="store.isLogin" :size="20" />
     </ElButton>
   </nav>
-  <Transition name="el-fade-in">
-    <ul
-      v-if="isNavVisible"
-      ref="navList"
-      class="nav nav-list fixed m-3 flex flex-wrap items-center gap-4 rounded-lg p-3"
-    >
-      <li v-for="item in menu.menus" :key="item.id">
-        <a
-          :href="item.url"
-          :title="item.title"
-          class="rounded-md px-3 py-1 transition hover:ring"
-        >
-          {{ item.title }}
-        </a>
-      </li>
-      <li v-if="store.isLogin" class="flex items-center">
-        <NuxtLink
-          to="/navigation"
-          class="rounded-md px-3 py-1 hover:ring"
-          title="编辑"
-          @click="isNavVisible = false"
-        >
-          <IconEdit :size="20" />
-        </NuxtLink>
-      </li>
-    </ul>
-  </Transition>
+  <NavCard v-model:visible="isNavVisible" class="nav" />
   <main>
     <slot />
   </main>
@@ -86,10 +52,5 @@ const handleOpenNav = () => (isNavVisible.value = true);
 :root.dark .nav {
   box-shadow: 0 0 2px rgba(255, 255, 255, 0.2) inset;
   background-color: rgba(0, 0, 0, 0.2);
-}
-
-.nav-list {
-  top: 4rem;
-  z-index: 10;
 }
 </style>

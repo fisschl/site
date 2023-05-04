@@ -80,14 +80,16 @@ watchDebounced(formData, refresh, { deep: true, debounce: 500 });
       :key="item.id"
       :timestamp="item.update_time"
     >
-      <ElLink :href="item.url" target="_blank" rel="noopener noreferrer">
-        <span>
-          {{ item.title }}
-          <ElTag size="small" class="ml-2" type="info">
-            {{ item.type }}
-          </ElTag>
-        </span>
-      </ElLink>
+      <a
+        class="hover:text-blue-500 hover:underline"
+        :href="item.url"
+        target="_blank"
+      >
+        {{ item.title }}
+        <ElTag size="small" class="ml-2" type="info">
+          {{ item.type }}
+        </ElTag>
+      </a>
     </ElTimelineItem>
   </ElTimeline>
   <ElSkeleton
