@@ -14,6 +14,12 @@ export const useUserStore = defineStore("user", () => {
     isLogin: false,
   });
   const isLogin = computed(() => user.value.isLogin);
+  watch(
+    () => user.value.isLogin,
+    () => {
+      localStorage.setItem("user-state", JSON.stringify(user.value));
+    }
+  );
   return {
     user,
     isLogin,
@@ -34,43 +40,6 @@ export const request = ofetch.create({
     headers.Authorization = token;
   },
 });
-
-export const useFetchUser = () => {
-  const store = useUserStore();
-  onMounted(() => {
-    const data = localStorage.getItem("user-state");
-    if (data) store.user = JSON.parse(data);
-    const url = new URL(window.location.href);
-    const params = url.searchParams;
-    let token = params.get("token") || undefined;
-    if (token) {
-      params.delete("token");
-      localStorage.setItem("token", token);
-      history.replaceState({}, "", url);
-    } else {
-      token = localStorage.getItem("token") || undefined;
-    }
-    if (!token) return;
-    return request<UserItem>("/user")
-      .then((res) => {
-        store.user = {
-          ...res,
-          isLogin: true,
-        };
-      })
-      .catch(() => {
-        localStorage.removeItem("token");
-        store.user.isLogin = false;
-      });
-  });
-  watch(
-    () => store.user.isLogin,
-    () => {
-      localStorage.setItem("user-state", JSON.stringify(store.user));
-    }
-  );
-  return store;
-};
 
 export const fetchLogin = () => {
   const url = new URL(LOGIN_URL);

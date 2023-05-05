@@ -10,15 +10,14 @@ export interface MenuItem {
 }
 
 export const useMenuStore = defineStore("menu", () => {
-  const menus = ref<MenuItem[]>([]);
   const user = useUserStore();
-  const fetchMenuList = () =>
-    request<MenuItem[]>("/navigation").then((res) => {
-      menus.value = res;
-    });
-  const { refresh } = useLazyAsyncData(fetchMenuList, {
-    watch: [() => user.isLogin],
-  });
+  const { refresh, data: menus } = useAsyncData(
+    () => request<MenuItem[]>("/navigation"),
+    {
+      watch: [() => user.isLogin],
+      default: () => [],
+    }
+  );
   return {
     menus,
     refresh,

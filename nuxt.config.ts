@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@pinia/nuxt",
     "@element-plus/nuxt",
+    "@vant/nuxt",
   ],
   app: {
     head: {

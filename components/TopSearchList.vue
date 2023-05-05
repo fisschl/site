@@ -19,11 +19,11 @@ const { data: topSearchType } = useAsyncData(() =>
 );
 
 const page = ref(1);
-const formData = ref<Partial<TopSearchItem>>({});
+const formData = reactive<Partial<TopSearchItem>>({});
 
 const fetchData = () =>
   request<TopSearchResponse>("/top-search", {
-    query: { page: page.value++, size: 20, ...formData.value },
+    query: { page: page.value++, size: 20, ...formData },
   }).then((res) =>
     res.list.map((item) => {
       item.update_time = formatShowTime(item.update_time);
@@ -45,7 +45,7 @@ watch(loadingVisible, (visible) => {
   });
 });
 
-watchDebounced(formData, refresh, { deep: true, debounce: 500 });
+watchDebounced(formData, refresh, { debounce: 500 });
 </script>
 
 <template>
