@@ -11,15 +11,12 @@ export interface MenuItem {
 
 export const useMenuStore = defineStore("menu", () => {
   const user = useUserStore();
-  const { refresh, data: menus } = useAsyncData(
+  const { refresh, data } = useAsyncData(
     () => request<MenuItem[]>("/navigation"),
-    {
-      watch: [() => user.isLogin],
-      default: () => [],
-    }
+    { watch: [() => user.isLogin] }
   );
   return {
-    menus,
+    menus: data,
     refresh,
   };
 });

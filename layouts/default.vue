@@ -40,47 +40,27 @@ const theme = computed(() => (colorMode.value === "dark" ? "dark" : "light"));
 
 <template>
   <VanConfigProvider :theme="theme">
-    <nav
-      class="nav sticky top-3 z-10 m-3 flex items-center rounded-lg py-1"
-      style="height: 3rem"
-    >
-      <ElButton
-        title="导航"
-        text
-        circle
-        class="mx-2 !h-auto"
-        @click.stop="handleOpenNav"
-      >
+    <nav class="relative flex items-center py-4">
+      <ElButton title="导航" text class="mx-2" @click.stop="handleOpenNav">
         <IconApps :size="20" />
       </ElButton>
       <h1 class="flex-1 text-center text-base">大道之行也 天下为公</h1>
       <ElButton
         text
         :title="store.isLogin ? 'Github' : '登录'"
-        circle
-        class="mx-2 !h-auto"
+        class="mx-2"
         @click="handleClickLogin"
       >
         <IconUserUp v-if="!store.isLogin" :size="20" />
         <IconBrandGithub v-if="store.isLogin" :size="20" />
       </ElButton>
     </nav>
-    <NavCard v-model:visible="isNavVisible" class="nav" />
+    <NavCard v-model:visible="isNavVisible" />
     <main>
       <slot></slot>
     </main>
+    <ElBacktop :right="20" :bottom="20" />
   </VanConfigProvider>
 </template>
 
-<style scoped>
-.nav {
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2) inset;
-  background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-}
-
-:root.dark .nav {
-  box-shadow: 0 0 2px rgba(255, 255, 255, 0.2) inset;
-  background-color: rgba(0, 0, 0, 0.2);
-}
-</style>
+<style scoped></style>
