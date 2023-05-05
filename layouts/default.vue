@@ -3,7 +3,7 @@ import { IconApps, IconBrandGithub, IconUserUp } from "@tabler/icons-vue";
 import type { UserItem } from "~/composables/user";
 
 const store = useUserStore();
-onMounted(() => {
+onMounted(async () => {
   const data = localStorage.getItem("user-state");
   if (data) store.user = JSON.parse(data);
   const url = new URL(window.location.href);
@@ -17,17 +17,15 @@ onMounted(() => {
     token = localStorage.getItem("token") || undefined;
   }
   if (!token) return;
-  return request<UserItem>("/user")
-    .then((res) => {
-      store.user = {
-        ...res,
-        isLogin: true,
-      };
-    })
-    .catch(() => {
-      localStorage.removeItem("token");
-      store.user.isLogin = false;
-    });
+  try {
+    store.user = {
+      ...(await request<UserItem>("/user")),
+      isLogin: true,
+    };
+  } catch (err) {
+    localStorage.removeItem("token");
+    store.user.isLogin = false;
+  }
 });
 
 const handleClickLogin = () =>

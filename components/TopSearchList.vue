@@ -38,11 +38,9 @@ const { refresh, data } = useAsyncData(() => {
 
 const loadingBox = ref<InstanceType<typeof ElSkeleton> | null>(null);
 const loadingVisible = useElementVisibility(() => loadingBox.value?.$el);
-watch(loadingVisible, (visible) => {
+watch(loadingVisible, async (visible) => {
   if (!visible) return;
-  fetchData().then((res) => {
-    data.value?.push(...res);
-  });
+  data.value?.push(...(await fetchData()));
 });
 
 watchDebounced(formData, refresh, { debounce: 500 });
