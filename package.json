@@ -25,6 +25,8 @@
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "@types/lodash-es": "^4.17.7",
+    "commitizen": "^4.3.0",
+    "cz-git": "^1.6.1",
     "eslint": "^8.39.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
@@ -44,6 +46,12 @@
     "rules": {
       "vue/no-multiple-template-root": "off",
       "import/no-duplicates": "off"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git",
+      "useEmoji": true
     }
   }
 }
