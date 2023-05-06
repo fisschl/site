@@ -9,18 +9,18 @@
   },
   "dependencies": {
     "@element-plus/nuxt": "^1.0.4",
-    "@nuxt/devtools": "^0.4.2",
+    "@nuxt/devtools": "^0.4.5",
     "@nuxtjs/color-mode": "^3.2.0",
-    "@nuxtjs/tailwindcss": "^6.6.6",
+    "@nuxtjs/tailwindcss": "^6.6.7",
     "@pinia/nuxt": "^0.4.9",
     "@tabler/icons-vue": "^2.17.0",
     "@vant/nuxt": "^1.0.1",
-    "@vueuse/core": "^10.1.0",
-    "@vueuse/nuxt": "^10.1.0",
-    "date-fns": "^2.29.3",
+    "@vueuse/core": "^10.1.2",
+    "@vueuse/nuxt": "^10.1.2",
+    "date-fns": "^2.30.0",
     "element-plus": "^2.3.4",
     "lodash-es": "^4.17.21",
-    "nuxt": "^3.4.2",
+    "nuxt": "^3.4.3",
     "pinia": "^2.0.35",
     "sass": "^1.62.1",
     "typescript": "^5.0.4",
@@ -30,11 +30,11 @@
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "@types/lodash-es": "^4.17.7",
     "czg": "^1.6.1",
-    "eslint": "^8.39.0",
+    "eslint": "^8.40.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.8",
-    "prettier-plugin-tailwindcss": "^0.2.7"
+    "prettier-plugin-tailwindcss": "^0.2.8"
   },
   "prettier": {
     "plugins": [
