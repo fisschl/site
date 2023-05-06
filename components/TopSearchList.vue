@@ -15,14 +15,14 @@ interface TopSearchResponse extends Required<Page> {
 }
 
 const { data: topSearchType } = useAsyncData(() =>
-  request<string[]>("/top-search-type")
+  request<string[]>("/topsearchtype")
 );
 
 const page = ref(1);
 const formData = reactive<Partial<TopSearchItem>>({});
 
 const fetchData = () =>
-  request<TopSearchResponse>("/top-search", {
+  request<TopSearchResponse>("/topsearch", {
     query: { page: page.value++, size: 20, ...formData },
   }).then((res) =>
     res.list.map((item) => {
