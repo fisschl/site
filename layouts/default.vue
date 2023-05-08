@@ -33,34 +33,29 @@ const handleClickLogin = () =>
 const isNavVisible = ref(false);
 
 const handleOpenNav = () => (isNavVisible.value = !isNavVisible.value);
-
-const colorMode = useColorMode();
-const theme = computed(() => (colorMode.value === "dark" ? "dark" : "light"));
 </script>
 
 <template>
-  <VanConfigProvider :theme="theme">
-    <nav class="relative flex items-center py-4">
-      <ElButton title="导航" text class="mx-2" @click.stop="handleOpenNav">
-        <IconApps :size="20" />
-      </ElButton>
-      <h1 class="flex-1 text-center text-base">大道之行也 天下为公</h1>
-      <ElButton
-        text
-        :title="store.isLogin ? 'Github' : '登录'"
-        class="mx-2"
-        @click="handleClickLogin"
-      >
-        <IconUserUp v-if="!store.isLogin" :size="20" />
-        <IconBrandGithub v-if="store.isLogin" :size="20" />
-      </ElButton>
-    </nav>
-    <NavCard v-model:visible="isNavVisible" />
-    <main>
-      <slot></slot>
-    </main>
-    <ElBacktop :right="20" :bottom="20" />
-  </VanConfigProvider>
+  <nav class="relative flex items-center py-4">
+    <ElButton title="导航" text class="mx-2" @click.stop="handleOpenNav">
+      <IconApps :size="20" />
+    </ElButton>
+    <h1 class="flex-1 text-center text-base">大道之行也 天下为公</h1>
+    <ElButton
+      text
+      :title="store.isLogin ? 'Github' : '登录'"
+      class="mx-2"
+      @click="handleClickLogin"
+    >
+      <IconUserUp v-if="!store.isLogin" :size="20" />
+      <IconBrandGithub v-if="store.isLogin" :size="20" />
+    </ElButton>
+  </nav>
+  <NavCard v-model:visible="isNavVisible" />
+  <main>
+    <slot></slot>
+  </main>
+  <ElBacktop :right="20" :bottom="20" />
 </template>
 
 <style scoped></style>
