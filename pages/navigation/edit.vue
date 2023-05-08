@@ -11,7 +11,7 @@ const isCreate = computed(() => !route.query.id);
 
 watchEffect(() => {
   if (isCreate.value) return;
-  const value = menu.menus.find((item) => item.id === route.query.id);
+  const value = menu.menus?.find((item) => item.id === route.query.id);
   if (!value) return router.replace("/navigation");
   value.sort ||= 0;
   item.value = JSON.parse(JSON.stringify(value));

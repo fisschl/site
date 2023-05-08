@@ -3,6 +3,10 @@ import { IconApps, IconBrandGithub, IconUserUp } from "@tabler/icons-vue";
 import type { UserItem } from "~/composables/user";
 
 const store = useUserStore();
+
+/**
+ * 处理登录逻辑
+ */
 onMounted(async () => {
   const data = localStorage.getItem("user-state");
   if (data) store.user = JSON.parse(data);

@@ -13,7 +13,7 @@ const menu = useMenuStore();
     </NuxtLink>
   </div>
   <div class="overflow-x-auto px-2 pb-6">
-    <ElTable style="min-width: 50rem" :data="menu.menus">
+    <ElTable style="min-width: 50rem" :data="menu.menus || undefined">
       <ElTableColumn
         show-overflow-tooltip
         prop="title"

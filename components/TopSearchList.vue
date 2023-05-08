@@ -72,19 +72,17 @@ watchDebounced(formData, refresh, { debounce: 500 });
       </ElSelect>
     </ClientOnly>
   </form>
-  <ol
-    class="mx-auto max-w-4xl divide-y divide-gray-200 px-4 dark:divide-gray-700"
-  >
+  <ol class="mx-auto max-w-4xl px-4">
     <li
       v-for="item in data"
       :key="item.id"
-      class="py-4"
+      class="my-2 rounded bg-gray-500/10 px-3 py-2 transition hover:bg-gray-500/20"
       :timestamp="item.update_time"
     >
       <a :href="item.url" target="_blank" class="text-base hover:underline">
         {{ item.title }}
       </a>
-      <p class="mt-2">
+      <p class="mt-1">
         <ElTag size="small" class="mr-2" type="success">
           {{ item.update_time }}
         </ElTag>
