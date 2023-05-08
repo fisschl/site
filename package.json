@@ -37,7 +37,8 @@
   "prettier": {
     "plugins": [
       "prettier-plugin-tailwindcss"
-    ]
+    ],
+    "endOfLine": "auto"
   },
   "eslintConfig": {
     "extends": [

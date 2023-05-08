@@ -37,13 +37,19 @@ const { refresh, data } = useAsyncData(() => {
 });
 
 const loadingBox = ref<InstanceType<typeof ElSkeleton> | null>(null);
-const loadingVisible = useElementVisibility(() => loadingBox.value?.$el);
-watch(loadingVisible, async (visible) => {
+watch(useElementVisibility(loadingBox), async (visible) => {
   if (!visible) return;
   data.value?.push(...(await fetchData()));
 });
 
-watchDebounced(formData, refresh, { debounce: 500 });
+watchDebounced(
+  formData,
+  () => {
+    data.value = [];
+    return refresh();
+  },
+  { debounce: 500 }
+);
 </script>
 
 <template>
@@ -95,7 +101,7 @@ watchDebounced(formData, refresh, { debounce: 500 });
   <ElSkeleton
     ref="loadingBox"
     class="mx-auto max-w-4xl px-4 pb-5"
-    :rows="10"
+    :rows="20"
     animated
   />
 </template>

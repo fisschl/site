@@ -10,5 +10,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <p class="jinrishici-sentence text-center"></p>
+  <p class="jinrishici-sentence text-center text-lg"></p>
 </template>
