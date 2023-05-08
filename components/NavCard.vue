@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { IconEdit } from "@tabler/icons-vue";
+import { NuxtLink } from "#components";
 
 const props = defineProps<{
   visible: boolean;
@@ -17,25 +18,30 @@ const store = useUserStore();
 <template>
   <ElCollapseTransition>
     <div v-if="visible">
-      <ul class="flex flex-wrap items-center gap-4 px-3 py-2">
+      <ul class="flex flex-wrap items-center gap-x-4 gap-y-2 px-3 py-2">
         <li v-for="item in menu.menus" :key="item.id">
-          <a
-            :href="item.url"
+          <ElButton
+            text
+            bg
+            tag="a"
             :title="item.title"
-            class="rounded-md px-3 py-2 transition hover:ring"
+            :href="item.url"
+            target="_blank"
           >
             {{ item.title }}
-          </a>
+          </ElButton>
         </li>
         <li v-if="store.isLogin" class="flex items-center">
-          <NuxtLink
+          <ElButton
+            :tag="NuxtLink"
+            text
+            bg
             to="/navigation"
-            class="rounded-md px-3 py-2 hover:ring"
             title="编辑"
             @click="visible = false"
           >
             <IconEdit :size="20" />
-          </NuxtLink>
+          </ElButton>
         </li>
       </ul>
     </div>

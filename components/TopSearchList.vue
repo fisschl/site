@@ -72,24 +72,28 @@ watchDebounced(formData, refresh, { debounce: 500 });
       </ElSelect>
     </ClientOnly>
   </form>
-  <ElTimeline class="!mx-auto max-w-4xl !px-4">
-    <ElTimelineItem
+  <ol
+    class="mx-auto max-w-4xl divide-y divide-gray-200 px-4 dark:divide-gray-700"
+  >
+    <li
       v-for="item in data"
       :key="item.id"
+      class="py-4"
       :timestamp="item.update_time"
     >
-      <a
-        class="hover:text-blue-500 hover:underline"
-        :href="item.url"
-        target="_blank"
-      >
+      <a :href="item.url" target="_blank" class="text-base hover:underline">
         {{ item.title }}
-        <ElTag size="small" class="ml-2" type="info">
+      </a>
+      <p class="mt-2">
+        <ElTag size="small" class="mr-2" type="success">
+          {{ item.update_time }}
+        </ElTag>
+        <ElTag size="small">
           {{ item.type }}
         </ElTag>
-      </a>
-    </ElTimelineItem>
-  </ElTimeline>
+      </p>
+    </li>
+  </ol>
   <ElSkeleton
     ref="loadingBox"
     class="mx-auto max-w-4xl px-4 pb-5"
