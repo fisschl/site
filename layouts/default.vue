@@ -1,42 +1,21 @@
 <script setup lang="ts">
-import { IconApps, IconBrandGithub, IconUserUp } from "@tabler/icons-vue";
-import type { UserItem } from "~/composables/user";
+import {
+  IconApps,
+  IconBrandGithub,
+  IconMoon,
+  IconSun,
+  IconUserUp,
+} from "@tabler/icons-vue";
 
-const store = useUserStore();
-
-/**
- * 处理登录逻辑
- */
-onMounted(async () => {
-  const data = localStorage.getItem("user-state");
-  if (data) store.user = JSON.parse(data);
-  const url = new URL(window.location.href);
-  const params = url.searchParams;
-  let token = params.get("token") || undefined;
-  if (token) {
-    params.delete("token");
-    localStorage.setItem("token", token);
-    history.replaceState({}, "", url);
-  } else {
-    token = localStorage.getItem("token") || undefined;
-  }
-  if (!token) return;
-  try {
-    store.user = {
-      ...(await request<UserItem>("/user")),
-      isLogin: true,
-    };
-  } catch (err) {
-    localStorage.removeItem("token");
-    store.user.isLogin = false;
-  }
-});
+const store = useHandleLogin();
 
 const handleClickLogin = () =>
   store.isLogin ? (location.href = "https://github.com") : fetchLogin();
 const isNavVisible = ref(false);
 
 const handleOpenNav = () => (isNavVisible.value = !isNavVisible.value);
+
+const { changeTheme } = useTheme();
 </script>
 
 <template>
@@ -45,10 +24,14 @@ const handleOpenNav = () => (isNavVisible.value = !isNavVisible.value);
       <IconApps :size="20" />
     </ElButton>
     <h1 class="flex-1 text-center text-base">大道之行也 天下为公</h1>
+    <ElButton text @click="changeTheme">
+      <IconSun class="icon-sun" :size="20" />
+      <IconMoon class="icon-moon" :size="20" />
+    </ElButton>
     <ElButton
       text
+      class="!ml-0 mr-2"
       :title="store.isLogin ? 'Github' : '登录'"
-      class="mx-2"
       @click="handleClickLogin"
     >
       <IconUserUp v-if="!store.isLogin" :size="20" />
@@ -62,4 +45,21 @@ const handleOpenNav = () => (isNavVisible.value = !isNavVisible.value);
   <ElBacktop :right="20" :bottom="20" />
 </template>
 
-<style scoped></style>
+<style scoped>
+.icon-sun,
+:root.dark .icon-moon {
+  display: none;
+}
+.icon-moon,
+:root.dark .icon-sun {
+  display: inline-block;
+}
+</style>
+
+<style>
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+</style>

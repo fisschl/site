@@ -55,3 +55,35 @@ export interface Page {
   size: number; // 每页的记录数
   total?: number; // 总记录数
 }
+
+export const useHandleLogin = () => {
+  const store = useUserStore();
+  /**
+   * 处理登录逻辑
+   */
+  onMounted(async () => {
+    const data = localStorage.getItem("user-state");
+    if (data) store.user = JSON.parse(data);
+    const url = new URL(window.location.href);
+    const params = url.searchParams;
+    let token = params.get("token") || undefined;
+    if (token) {
+      params.delete("token");
+      localStorage.setItem("token", token);
+      history.replaceState({}, "", url);
+    } else {
+      token = localStorage.getItem("token") || undefined;
+    }
+    if (!token) return;
+    try {
+      store.user = {
+        ...(await request<UserItem>("/user")),
+        isLogin: true,
+      };
+    } catch (err) {
+      localStorage.removeItem("token");
+      store.user.isLogin = false;
+    }
+  });
+  return store;
+};
