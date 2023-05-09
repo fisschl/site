@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { IconReload } from "@tabler/icons-vue";
 import type { ElSkeleton } from "element-plus";
 import { Page } from "~/composables/user";
 
@@ -19,11 +20,11 @@ const { data: topSearchType } = useAsyncData(() =>
 );
 
 const page = ref(1);
-const formData = reactive<Partial<TopSearchItem>>({});
+const formData = useDefaultRef<Partial<TopSearchItem>>({});
 
 const fetchData = () =>
   request<TopSearchResponse>("/topsearch", {
-    query: { page: page.value++, size: 20, ...formData },
+    query: { page: page.value++, size: 20, ...formData.value },
   }).then((res) =>
     res.list.map((item) => {
       item.update_time = formatShowTime(item.update_time);
@@ -48,8 +49,10 @@ watchDebounced(
     data.value = [];
     return refresh();
   },
-  { debounce: 500 }
+  { debounce: 500, deep: true }
 );
+
+const reset = () => formData.reset();
 </script>
 
 <template>
@@ -77,6 +80,9 @@ watchDebounced(
         />
       </ElSelect>
     </ClientOnly>
+    <ElButton bg text title="重置" @click="reset">
+      <IconReload :size="18" />
+    </ElButton>
   </form>
   <ol class="mx-auto max-w-4xl px-4">
     <li
@@ -85,17 +91,19 @@ watchDebounced(
       class="my-2 rounded bg-gray-400/5 px-3 py-2 transition hover:bg-gray-400/10"
       :timestamp="item.update_time"
     >
-      <a :href="item.url" target="_blank" class="text-base hover:underline">
+      <a
+        :href="item.url"
+        target="_blank"
+        class="mb-1 block text-base hover:text-indigo-400 hover:underline"
+      >
         {{ item.title }}
       </a>
-      <p class="mt-1">
-        <ElTag size="small" class="mr-2" type="success">
-          {{ item.update_time }}
-        </ElTag>
-        <ElTag size="small">
-          {{ item.type }}
-        </ElTag>
-      </p>
+      <ElTag size="small" class="mr-2" type="success">
+        {{ item.update_time }}
+      </ElTag>
+      <ElTag size="small">
+        {{ item.type }}
+      </ElTag>
     </li>
   </ol>
   <ElSkeleton
