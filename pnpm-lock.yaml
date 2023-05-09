@@ -46,6 +46,9 @@ dependencies:
   typescript:
     specifier: ^5.0.4
     version: 5.0.4
+  undici:
+    specifier: ^5.22.0
+    version: 5.22.0
 
 devDependencies:
   '@nuxtjs/eslint-config-typescript':
@@ -8084,9 +8087,8 @@ packages:
     dev: false
 
   /undici@5.22.0:
-    resolution: {integrity: sha512-f6pTQ9RF4DQtwoWSaC42P/NKlUjvezVvd9r155ohqkwFNRyBKM3f3pcty3ouusefNRyM25XhIQEbeQ46sZDJfQ==, tarball: https://registry.npmmirror.com/undici/-/undici-5.21.2.tgz}
-    engines: {node: '>=12.18'}
-    deprecated: '[WARNING] Use 5.21.2 instead of 5.22.0, reason: https://github.com/nodejs/undici/pull/2091'
+    resolution: {integrity: sha512-fR9RXCc+6Dxav4P9VV/sp5w3eFiSdOjJYsbtWfd4s5L5C4ogyuVpdKIVHeW0vV1MloM65/f7W45nR9ZxwVdyiA==}
+    engines: {node: '>=14.0'}
     dependencies:
       busboy: 1.6.0
     dev: false
