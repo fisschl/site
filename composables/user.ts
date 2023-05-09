@@ -16,9 +16,7 @@ export const useUserStore = defineStore("user", () => {
   const isLogin = computed(() => user.value.isLogin);
   watch(
     () => user.value.isLogin,
-    () => {
-      localStorage.setItem("user-state", JSON.stringify(user.value));
-    }
+    () => localStorage.setItem("user-state", JSON.stringify(user.value))
   );
   return {
     user,

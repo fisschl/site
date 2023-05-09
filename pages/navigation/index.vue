@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { IconEdit } from "@tabler/icons-vue";
+import { NuxtLink } from "#components";
+
 const menu = useMenuStore();
 </script>
 
@@ -13,7 +16,7 @@ const menu = useMenuStore();
     </NuxtLink>
   </div>
   <div class="overflow-x-auto px-2 pb-6">
-    <ElTable style="min-width: 50rem" :data="menu.menus || undefined">
+    <ElTable style="min-width: 50rem" :data="menu.menus || []">
       <ElTableColumn
         show-overflow-tooltip
         prop="title"
@@ -46,9 +49,14 @@ const menu = useMenuStore();
       </ElTableColumn>
       <ElTableColumn width="60" label="操作">
         <template #default="{ row }">
-          <NuxtLink :to="`/navigation/edit?id=${row.id}`">
-            <ElButton link type="primary" size="small"> 编辑 </ElButton>
-          </NuxtLink>
+          <ElButton
+            bg
+            text
+            :tag="NuxtLink"
+            :to="`/navigation/edit?id=${row.id}`"
+            size="small"
+            :icon="IconEdit"
+          />
         </template>
       </ElTableColumn>
     </ElTable>
