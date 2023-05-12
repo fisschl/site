@@ -8,6 +8,7 @@
     "cz": "git add . && czg"
   },
   "dependencies": {
+    "@babylonjs/core": "^6.3.1",
     "@element-plus/nuxt": "^1.0.4",
     "@nuxt/devtools": "^0.4.6",
     "@nuxtjs/color-mode": "^3.2.0",

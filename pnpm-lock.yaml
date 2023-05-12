@@ -1,6 +1,9 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  '@babylonjs/core':
+    specifier: ^6.3.1
+    version: 6.3.1
   '@element-plus/nuxt':
     specifier: ^1.0.4
     version: 1.0.4(@element-plus/icons-vue@2.1.0)(element-plus@2.3.4)
@@ -408,6 +411,10 @@ packages:
       '@babel/helper-string-parser': 7.21.5
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
+    dev: false
+
+  /@babylonjs/core@6.3.1:
+    resolution: {integrity: sha512-VShcryUF+H55cJ556Ki9yBQJCIMMALsin1dFHFmdG4VUKlDf9AVj5WbvSmAtr0dRNJZop+RNRrteKHHqVEOYyA==}
     dev: false
 
   /@cloudflare/kv-asset-handler@0.3.0:
