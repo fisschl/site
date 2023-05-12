@@ -1,12 +1,13 @@
 import { cloneDeep } from "lodash-es";
 import type { FormInstance } from "element-plus";
+import { toValue } from "@vueuse/core";
 
 export const useDefaultRef = <T>(initialValue: T) => {
-  const defaultData: any = cloneDeep(initialValue);
-  const data = ref(initialValue);
-  return Object.assign(data, {
-    reset: () => (data.value = cloneDeep(defaultData)),
+  const defaultData = ref(cloneDeep(toValue(initialValue)));
+  const data = Object.assign(ref(initialValue), {
+    reset: () => (data.value = cloneDeep(defaultData.value)),
   });
+  return data;
 };
 
 export const useForm = () => {

@@ -11,9 +11,9 @@
     "@element-plus/nuxt": "^1.0.4",
     "@nuxt/devtools": "^0.4.6",
     "@nuxtjs/color-mode": "^3.2.0",
-    "@nuxtjs/tailwindcss": "^6.6.7",
+    "@nuxtjs/tailwindcss": "^6.6.8",
     "@pinia/nuxt": "^0.4.10",
-    "@tabler/icons-vue": "^2.17.0",
+    "@tabler/icons-vue": "^2.18.0",
     "@vueuse/core": "^10.1.2",
     "@vueuse/nuxt": "^10.1.2",
     "date-fns": "^2.30.0",
@@ -23,7 +23,7 @@
     "pinia": "^2.0.36",
     "sass": "^1.62.1",
     "typescript": "^5.0.4",
-    "undici": "^5.22.0"
+    "undici": "^5.22.1"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
