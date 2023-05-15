@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@babylonjs/core": "^6.3.1",
+    "@babylonjs/loaders": "^6.3.1",
     "@element-plus/nuxt": "^1.0.5",
     "@nuxt/devtools": "^0.4.6",
     "@nuxtjs/color-mode": "^3.2.0",

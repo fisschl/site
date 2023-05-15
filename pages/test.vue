@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import {
   ArcRotateCamera,
+  Color4,
   Engine,
   HemisphericLight,
-  MeshBuilder,
   Scene,
+  SceneLoader,
   Vector3,
   WebGPUEngine,
 } from "@babylonjs/core";
+import "@babylonjs/loaders/glTF";
 
 definePageMeta({
   layout: false,
@@ -30,13 +32,14 @@ const createEngine = async () => {
 onMounted(async () => {
   const engine = await createEngine();
   const scene = new Scene(engine);
+  scene.clearColor = new Color4(0.5, 0.5, 0.5);
 
   const camera = new ArcRotateCamera(
     "camera",
     0,
-    1,
-    20,
-    new Vector3(0, 0, 0),
+    1.6,
+    5,
+    new Vector3(0, 1.5, 0),
     scene
   );
   camera.lowerRadiusLimit = 1;
@@ -44,17 +47,10 @@ onMounted(async () => {
   camera.wheelDeltaPercentage = 5 / 1000;
   camera.attachControl();
 
-  const light = new HemisphericLight("light", new Vector3(0, 1, 0), scene);
-  light.intensity = 0.5;
+  const light1 = new HemisphericLight("light1", new Vector3(0, 1, 0), scene);
+  light1.intensity = 2;
 
-  const sphere = MeshBuilder.CreateBox(
-    "sphere",
-    {
-      size: 4,
-    },
-    scene
-  );
-  sphere.position.y = 1;
+  await SceneLoader.ImportMeshAsync("", "/3d/irena/", "scene.gltf", scene);
 
   engine.runRenderLoop(() => scene.render());
   window.addEventListener("resize", () => engine.resize());
