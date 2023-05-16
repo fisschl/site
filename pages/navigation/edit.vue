@@ -66,60 +66,62 @@ const remove = () =>
 </script>
 
 <template>
-  <ElBreadcrumb class="mx-4 mb-10 mt-3">
-    <ElBreadcrumbItem to="/">首页</ElBreadcrumbItem>
-    <ElBreadcrumbItem to="/navigation">导航管理</ElBreadcrumbItem>
-    <ElBreadcrumbItem>编辑</ElBreadcrumbItem>
-  </ElBreadcrumb>
-  <ElForm
-    ref="form"
-    :rules="rules"
-    class="mx-auto my-6 max-w-lg px-4 pb-6"
-    :model="formData"
-    label-position="top"
-  >
-    <ElFormItem prop="title" label="标题">
-      <ElInput v-model="formData.title" style="max-width: 20rem" />
-    </ElFormItem>
-    <ElFormItem prop="url" label="链接">
-      <ElInput v-model="formData.url" style="max-width: 30rem" />
-    </ElFormItem>
-    <ElFormItem prop="sort" label="顺序">
-      <ElInputNumber v-model="formData.sort" />
-    </ElFormItem>
-    <ElFormItem prop="visible" label="可见性">
-      <ElSwitch
-        v-model="formData.visible"
-        active-text="可见"
-        inactive-text="隐藏"
-      />
-    </ElFormItem>
-    <ElFormItem prop="public" label="权限">
-      <ElSwitch
-        v-model="formData.public"
-        active-text="公开"
-        inactive-text="私有"
-      />
-    </ElFormItem>
-    <ElFormItem class="mt-6">
-      <ElButton
-        style="width: 8rem"
-        type="primary"
-        plain
-        :loading="loading"
-        @click="isCreate ? create() : update()"
-      >
-        {{ isCreate ? "创建" : "更新" }}
-      </ElButton>
-      <ElButton
-        v-if="!isCreate"
-        :loading="loading"
-        text
-        type="danger"
-        @click="remove"
-      >
-        删除
-      </ElButton>
-    </ElFormItem>
-  </ElForm>
+  <main>
+    <ElBreadcrumb class="mx-4 mb-10 mt-3">
+      <ElBreadcrumbItem to="/">首页</ElBreadcrumbItem>
+      <ElBreadcrumbItem to="/navigation">导航管理</ElBreadcrumbItem>
+      <ElBreadcrumbItem>编辑</ElBreadcrumbItem>
+    </ElBreadcrumb>
+    <ElForm
+      ref="form"
+      :rules="rules"
+      class="mx-auto my-6 max-w-lg px-4 pb-6"
+      :model="formData"
+      label-position="top"
+    >
+      <ElFormItem prop="title" label="标题">
+        <ElInput v-model="formData.title" style="max-width: 20rem" />
+      </ElFormItem>
+      <ElFormItem prop="url" label="链接">
+        <ElInput v-model="formData.url" style="max-width: 30rem" />
+      </ElFormItem>
+      <ElFormItem prop="sort" label="顺序">
+        <ElInputNumber v-model="formData.sort" />
+      </ElFormItem>
+      <ElFormItem prop="visible" label="可见性">
+        <ElSwitch
+          v-model="formData.visible"
+          active-text="可见"
+          inactive-text="隐藏"
+        />
+      </ElFormItem>
+      <ElFormItem prop="public" label="权限">
+        <ElSwitch
+          v-model="formData.public"
+          active-text="公开"
+          inactive-text="私有"
+        />
+      </ElFormItem>
+      <ElFormItem class="mt-6">
+        <ElButton
+          style="width: 8rem"
+          type="primary"
+          plain
+          :loading="loading"
+          @click="isCreate ? create() : update()"
+        >
+          {{ isCreate ? "创建" : "更新" }}
+        </ElButton>
+        <ElButton
+          v-if="!isCreate"
+          :loading="loading"
+          text
+          type="danger"
+          @click="remove"
+        >
+          删除
+        </ElButton>
+      </ElFormItem>
+    </ElForm>
+  </main>
 </template>

@@ -12,6 +12,8 @@ export default defineNuxtConfig({
       title: "My App",
       meta: [{ name: "description", content: "My amazing site." }],
     },
+    pageTransition: { name: "page", mode: "out-in" },
+    layoutTransition: { name: "page", mode: "out-in" },
   },
   colorMode: {
     classSuffix: "",
