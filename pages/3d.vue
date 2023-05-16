@@ -31,12 +31,13 @@ const createEngine = async () => {
   return engine;
 };
 
-const fps = ref(0);
 const engine = ref<Engine>();
+const fps = ref(0);
 
 useIntervalFn(() => {
-  fps.value = engine.value?.getFps() || 0;
-}, 200);
+  if (!engine.value) return;
+  fps.value = engine.value.getFps();
+}, 100);
 
 onBeforeUnmount(() => {
   engine.value?.dispose();
@@ -48,7 +49,7 @@ onMounted(async () => {
   msg.value = "引擎初始化中";
   engine.value = await createEngine();
   const scene = new Scene(engine.value);
-  scene.clearColor = new Color4(0.5, 0.5, 0.5);
+  scene.clearColor = new Color4(0.1, 0.1, 0.1);
 
   const camera = new ArcRotateCamera(
     "camera",
@@ -80,11 +81,9 @@ onMounted(async () => {
 <template>
   <main>
     <canvas id="renderCanvas" class="h-screen w-screen outline-none"></canvas>
-    <section
-      class="fixed top-0 flex w-full flex-wrap items-center gap-4 px-4 py-2"
-    >
-      <span>FPS: {{ fps.toFixed(2) }}</span>
+    <section class="fixed top-0 flex w-full gap-2 px-2 py-1 text-sm">
       <span class="flex-1 text-center">{{ msg }}</span>
+      <span>{{ fps.toFixed(0) }} FPS</span>
     </section>
   </main>
 </template>
