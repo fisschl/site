@@ -7,13 +7,17 @@ const menu = useMenuStore();
 const router = useRouter();
 const isCreate = computed(() => !route.query.id);
 
-watchEffect(() => {
-  if (isCreate.value) return;
-  const value = menu.menus?.find((item) => item.id === route.query.id);
-  if (!value) return router.replace("/navigation");
-  value.sort ||= 0;
-  formData.value = JSON.parse(JSON.stringify(value));
-});
+debouncedWatch(
+  () => menu.menus,
+  () => {
+    if (isCreate.value) return;
+    const value = menu.menus?.find((item) => item.id === route.query.id);
+    if (!value) return router.replace("/navigation");
+    value.sort ||= 0;
+    formData.value = JSON.parse(JSON.stringify(value));
+  },
+  { debounce: 100, immediate: true }
+);
 
 const rules = {
   title: [{ required: true, message: "请输入标题" }],
@@ -88,10 +92,10 @@ const remove = () =>
       <ElFormItem prop="sort" label="顺序">
         <ElInputNumber v-model="formData.sort" />
       </ElFormItem>
-      <ElFormItem prop="visible" label="可见性">
+      <ElFormItem prop="visible" label="状态">
         <ElSwitch
           v-model="formData.visible"
-          active-text="可见"
+          active-text="显示"
           inactive-text="隐藏"
         />
       </ElFormItem>

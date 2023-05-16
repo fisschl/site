@@ -12,13 +12,10 @@ export const useDefaultRef = <T>(initialValue: T) => {
 
 export const useForm = () => {
   const form = ref<FormInstance>();
-  const validate = () =>
-    new Promise<void>((resolve, reject) => {
-      if (!form.value) return reject(new Error("form is not ready"));
-      form.value.validate((valid: boolean) => {
-        if (valid) return resolve();
-        reject(new Error("form validation failed"));
-      });
-    });
+  const validate = async () => {
+    if (!form.value) throw new Error("form is not ready");
+    await form.value.validate();
+  };
+
   return { form, validate };
 };

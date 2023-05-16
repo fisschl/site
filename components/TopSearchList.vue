@@ -88,7 +88,7 @@ const reset = () => formData.reset();
     <li
       v-for="item in data"
       :key="item.id"
-      class="my-2 rounded bg-gray-400/5 px-3 py-2 transition hover:bg-gray-400/10"
+      class="my-3 rounded bg-gray-400/5 px-3 py-2 transition hover:bg-gray-400/10"
     >
       <a
         :href="item.url"

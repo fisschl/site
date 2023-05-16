@@ -1,0 +1,92 @@
+<script setup lang="ts">
+import {
+  ArcRotateCamera,
+  Color4,
+  DefaultRenderingPipeline,
+  Engine,
+  HemisphericLight,
+  Scene,
+  SceneLoader,
+  Vector3,
+  WebGPUEngine,
+} from "@babylonjs/core";
+import "@babylonjs/loaders";
+
+definePageMeta({
+  layout: false,
+});
+
+const createEngine = async () => {
+  const canvas = document.getElementById("renderCanvas");
+  if (!(canvas instanceof HTMLCanvasElement))
+    throw new TypeError("Canvas not found");
+  const gpuSupported = await WebGPUEngine.IsSupportedAsync;
+  if (!gpuSupported) {
+    ElMessage("WebGPU not supported, falling back to WebGL");
+    return new Engine(canvas);
+  }
+  const engine = new WebGPUEngine(canvas);
+  await engine.initAsync();
+  window.addEventListener("resize", () => engine.resize());
+  return engine;
+};
+
+const fps = ref(0);
+const engine = ref<Engine>();
+
+useIntervalFn(() => {
+  fps.value = engine.value?.getFps() || 0;
+}, 200);
+
+onBeforeUnmount(() => {
+  engine.value?.dispose();
+});
+
+const msg = ref("");
+
+onMounted(async () => {
+  msg.value = "引擎初始化中";
+  engine.value = await createEngine();
+  const scene = new Scene(engine.value);
+  scene.clearColor = new Color4(0.5, 0.5, 0.5);
+
+  const camera = new ArcRotateCamera(
+    "camera",
+    Math.PI / 2,
+    Math.PI / 2,
+    5,
+    new Vector3(0, 1.5, 0),
+    scene
+  );
+  camera.lowerRadiusLimit = 1;
+  camera.upperRadiusLimit = 100;
+  camera.wheelDeltaPercentage = 5 / 1000;
+  camera.attachControl();
+
+  const light1 = new HemisphericLight("light1", new Vector3(0, 1, 0), scene);
+  light1.intensity = 2;
+
+  msg.value = "模型加载中";
+  await SceneLoader.ImportMeshAsync("", "/3d/irena/", "scene.gltf", scene);
+
+  const pipeline = new DefaultRenderingPipeline();
+  pipeline.samples = 4;
+
+  engine.value.runRenderLoop(() => scene.render());
+  msg.value = "";
+});
+</script>
+
+<template>
+  <main>
+    <canvas id="renderCanvas" class="h-screen w-screen outline-none"></canvas>
+    <section
+      class="fixed top-0 flex w-full flex-wrap items-center gap-4 px-4 py-2"
+    >
+      <span>FPS: {{ fps.toFixed(2) }}</span>
+      <span class="flex-1 text-center">{{ msg }}</span>
+    </section>
+  </main>
+</template>
+
+<style scoped></style>
