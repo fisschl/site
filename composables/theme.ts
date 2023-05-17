@@ -8,9 +8,10 @@ declare global {
 
 export const useTheme = () => {
   const colorMode = useColorMode();
+  const isDark = computed(() => colorMode.value === "dark");
   const changeTheme = async (e: MouseEvent) => {
     const change = () => {
-      colorMode.preference = colorMode.value === "dark" ? "light" : "dark";
+      colorMode.preference = isDark.value ? "light" : "dark";
       return nextTick();
     };
     if (!document.startViewTransition) return change();
@@ -34,5 +35,6 @@ export const useTheme = () => {
   };
   return {
     changeTheme,
+    isDark,
   };
 };

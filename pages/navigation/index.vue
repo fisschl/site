@@ -7,7 +7,7 @@ const menu = useMenuStore();
 
 <template>
   <main>
-    <ElBreadcrumb class="mx-4 mb-3">
+    <ElBreadcrumb class="mx-4 mb-2 mt-3">
       <ElBreadcrumbItem to="/">首页</ElBreadcrumbItem>
       <ElBreadcrumbItem>导航管理</ElBreadcrumbItem>
     </ElBreadcrumb>

@@ -84,10 +84,18 @@ const remove = () =>
       label-position="top"
     >
       <ElFormItem prop="title" label="标题">
-        <ElInput v-model="formData.title" style="max-width: 20rem" />
+        <ElInput
+          v-model="formData.title"
+          style="max-width: 20rem"
+          @change="formData.title = formData.title?.trim()"
+        />
       </ElFormItem>
       <ElFormItem prop="url" label="链接">
-        <ElInput v-model="formData.url" style="max-width: 30rem" />
+        <ElInput
+          v-model="formData.url"
+          style="max-width: 30rem"
+          @change="formData.url = formData.url?.trim()"
+        />
       </ElFormItem>
       <ElFormItem prop="sort" label="顺序">
         <ElInputNumber v-model="formData.sort" />

@@ -7,15 +7,26 @@ import {
   IconUserUp,
 } from "@tabler/icons-vue";
 
+const BackToTop = defineAsyncComponent(
+  () => import("~/components/BackToTop.vue")
+);
+
+const NavCard = defineAsyncComponent(() => import("~/components/NavCard.vue"));
+
 const store = useHandleLogin();
 
 const handleClickLogin = () =>
   store.isLogin ? (location.href = "https://github.com") : fetchLogin();
-const isNavVisible = ref(false);
 
+const isNavVisible = ref(false);
+const route = useRoute();
+watchEffect(() => {
+  if (route.path === "/") isNavVisible.value = true;
+  else isNavVisible.value = false;
+});
 const handleOpenNav = () => (isNavVisible.value = !isNavVisible.value);
 
-const { changeTheme } = useTheme();
+const { changeTheme, isDark } = useTheme();
 </script>
 
 <template>
@@ -27,8 +38,8 @@ const { changeTheme } = useTheme();
         </ElButton>
         <h1 class="flex-1 text-center text-base">大道之行也 天下为公</h1>
         <ElButton text @click="changeTheme">
-          <IconSun class="icon-sun" :size="20" />
-          <IconMoon class="icon-moon" :size="20" />
+          <IconSun v-if="isDark" class="icon-sun" :size="20" />
+          <IconMoon v-else class="icon-moon" :size="20" />
         </ElButton>
         <ElButton
           text
@@ -42,26 +53,7 @@ const { changeTheme } = useTheme();
       </nav>
       <NavCard v-model:visible="isNavVisible" />
       <slot></slot>
-      <ElBacktop :right="20" :bottom="20" />
+      <BackToTop />
     </ElConfigProvider>
   </div>
 </template>
-
-<style scoped>
-.icon-sun,
-:root.dark .icon-moon {
-  display: none;
-}
-.icon-moon,
-:root.dark .icon-sun {
-  display: inline-block;
-}
-</style>
-
-<style>
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-</style>
