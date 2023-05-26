@@ -37,10 +37,12 @@ const { changeTheme, isDark } = useTheme();
           <IconApps :size="20" />
         </ElButton>
         <h1 class="flex-1 text-center text-base">大道之行也 天下为公</h1>
-        <ElButton text @click="changeTheme">
-          <IconSun v-if="isDark" class="icon-sun" :size="20" />
-          <IconMoon v-else class="icon-moon" :size="20" />
-        </ElButton>
+        <ClientOnly>
+          <ElButton text @click="changeTheme">
+            <IconSun v-if="isDark" class="icon-sun" :size="20" />
+            <IconMoon v-else class="icon-moon" :size="20" />
+          </ElButton>
+        </ClientOnly>
         <ElButton
           text
           class="!ml-0 mr-2"
