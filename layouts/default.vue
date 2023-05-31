@@ -21,8 +21,7 @@ const handleClickLogin = () =>
 const isNavVisible = ref(false);
 const route = useRoute();
 watchEffect(() => {
-  if (route.path === "/") isNavVisible.value = true;
-  else isNavVisible.value = false;
+  isNavVisible.value = route.path === "/";
 });
 const handleOpenNav = () => (isNavVisible.value = !isNavVisible.value);
 
@@ -56,6 +55,11 @@ const { changeTheme, isDark } = useTheme();
       <NavCard v-model:visible="isNavVisible" />
       <slot></slot>
       <BackToTop />
+      <footer class="flex items-center justify-center gap-4 px-4 py-10">
+        <ElLink href="https://beian.miit.gov.cn/" target="_blank">
+          豫ICP备2023011860号-1
+        </ElLink>
+      </footer>
     </ElConfigProvider>
   </div>
 </template>

@@ -84,7 +84,7 @@ const reset = () => formData.reset();
       <IconReload :size="18" />
     </ElButton>
   </form>
-  <ol class="mx-auto max-w-4xl px-4">
+  <ol class="mx-auto max-h-screen max-w-4xl overflow-auto px-4">
     <li
       v-for="item in data"
       :key="item.id"
@@ -104,13 +104,10 @@ const reset = () => formData.reset();
         {{ item.type }}
       </ElTag>
     </li>
+    <li>
+      <ElSkeleton ref="loadingBox" class="" :rows="20" animated />
+    </li>
   </ol>
-  <ElSkeleton
-    ref="loadingBox"
-    class="mx-auto max-w-4xl px-4 pb-5"
-    :rows="20"
-    animated
-  />
 </template>
 
 <style scoped></style>
