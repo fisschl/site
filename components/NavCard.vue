@@ -18,7 +18,7 @@ const store = useUserStore();
 <template>
   <ElCollapseTransition>
     <div v-if="visible">
-      <div class="flex flex-wrap items-center gap-y-3 px-3 py-2">
+      <div class="link-list flex flex-wrap items-center gap-3 px-3 py-2">
         <ElButton
           v-for="item in menu.menus"
           :key="item.id"
@@ -46,4 +46,8 @@ const store = useUserStore();
   </ElCollapseTransition>
 </template>
 
-<style scoped></style>
+<style scoped>
+.link-list a {
+  margin: 0;
+}
+</style>
