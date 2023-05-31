@@ -18,25 +18,30 @@ const store = useUserStore();
 <template>
   <ElCollapseTransition>
     <div v-if="visible">
-      <ul class="flex flex-wrap items-center gap-x-4 gap-y-2 px-3 py-2">
-        <li v-for="item in menu.menus" :key="item.id">
-          <ElButton
-            text
-            bg
-            tag="a"
-            :title="item.title"
-            :href="item.url"
-            target="_blank"
-          >
-            {{ item.title }}
-          </ElButton>
-        </li>
-        <li v-if="store.isLogin" class="flex items-center">
-          <ElButton :tag="NuxtLink" text bg to="/navigation" title="编辑">
-            <IconEdit :size="20" />
-          </ElButton>
-        </li>
-      </ul>
+      <div class="flex flex-wrap items-center gap-y-3 px-3 py-2">
+        <ElButton
+          v-for="item in menu.menus"
+          :key="item.id"
+          text
+          bg
+          tag="a"
+          :title="item.title"
+          :href="item.url"
+          target="_blank"
+        >
+          {{ item.title }}
+        </ElButton>
+        <ElButton
+          v-if="store.isLogin"
+          :tag="NuxtLink"
+          text
+          bg
+          to="/navigation"
+          title="编辑"
+        >
+          <IconEdit :size="20" />
+        </ElButton>
+      </div>
     </div>
   </ElCollapseTransition>
 </template>

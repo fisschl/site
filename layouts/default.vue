@@ -10,9 +10,10 @@ import {
 const BackToTop = defineAsyncComponent(
   () => import("~/components/BackToTop.vue")
 );
-
 const NavCard = defineAsyncComponent(() => import("~/components/NavCard.vue"));
-
+const PageFooter = defineAsyncComponent(
+  () => import("~/components/PageFooter.vue")
+);
 const store = useHandleLogin();
 
 const handleClickLogin = () =>
@@ -55,11 +56,7 @@ const { changeTheme, isDark } = useTheme();
       <NavCard v-model:visible="isNavVisible" />
       <slot></slot>
       <BackToTop />
-      <footer class="flex items-center justify-center gap-4 px-4 py-10">
-        <ElLink href="https://beian.miit.gov.cn/" target="_blank">
-          豫ICP备2023011860号-1
-        </ElLink>
-      </footer>
+      <PageFooter />
     </ElConfigProvider>
   </div>
 </template>

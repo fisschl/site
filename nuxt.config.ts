@@ -9,7 +9,7 @@ export default defineNuxtConfig({
   ],
   app: {
     head: {
-      title: "Site 01",
+      title: "My Site",
       meta: [{ name: "description", content: "My amazing site." }],
     },
     pageTransition: { name: "page", mode: "out-in" },
