@@ -34,8 +34,7 @@ export const request = ofetch.create({
     if (typeof window === "undefined") return;
     options.headers ||= {};
     const headers: any = options.headers;
-    const token = localStorage.getItem("token");
-    headers.Authorization = token;
+    headers.Authorization = localStorage.getItem("token");
   },
 });
 

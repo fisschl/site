@@ -4,19 +4,14 @@ export interface MenuItem {
   id: string;
   title: string;
   url: string;
-  visible: boolean;
-  public: boolean;
-  sort: number;
+  update_time: string;
 }
 
 export const useMenuStore = defineStore("menu", () => {
-  const user = useUserStore();
-  const { refresh, data } = useAsyncData(
-    () => request<MenuItem[]>("/navigation"),
-    { watch: [() => user.isLogin] }
-  );
+  const list = ref<MenuItem[]>([]);
   return {
-    menus: data,
-    refresh,
+    list,
   };
 });
+
+export const getNavigation = () => request<MenuItem[]>("/navigation");

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { IconEdit } from "@tabler/icons-vue";
 import { NuxtLink } from "#components";
+import type { MenuItem } from "~/composables/menu";
+import { request } from "~/composables/user";
 
 const props = defineProps<{
   visible: boolean;
@@ -11,8 +13,20 @@ const emit = defineEmits<{
 }>();
 
 const { visible } = useVModels(props, emit);
+const user = useUserStore();
 const menu = useMenuStore();
-const store = useUserStore();
+watch(
+  () => user.isLogin,
+  () => getNavigation().then((res) => (menu.list = res))
+);
+
+const handleGoTo = async (item: MenuItem) => {
+  await request("/navigation/visit", {
+    method: "POST",
+    query: { id: item.id },
+  });
+  location.href = item.url;
+};
 </script>
 
 <template>
@@ -20,7 +34,7 @@ const store = useUserStore();
     <div v-if="visible">
       <div class="link-list flex flex-wrap items-center gap-3 px-3 py-2">
         <ElButton
-          v-for="item in menu.menus"
+          v-for="item in menu.list"
           :key="item.id"
           text
           bg
@@ -28,11 +42,12 @@ const store = useUserStore();
           :title="item.title"
           :href="item.url"
           target="_blank"
+          @click.prevent="handleGoTo(item)"
         >
           {{ item.title }}
         </ElButton>
         <ElButton
-          v-if="store.isLogin"
+          v-if="user.isLogin"
           :tag="NuxtLink"
           text
           bg

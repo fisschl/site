@@ -7,16 +7,15 @@ const menu = useMenuStore();
 const router = useRouter();
 const isCreate = computed(() => !route.query.id);
 
-debouncedWatch(
-  () => menu.menus,
+watch(
+  () => menu.list,
   () => {
     if (isCreate.value) return;
-    const value = menu.menus?.find((item) => item.id === route.query.id);
+    const value = menu.list?.find((item) => item.id === route.query.id);
     if (!value) return router.replace("/navigation");
-    value.sort ||= 0;
     formData.value = JSON.parse(JSON.stringify(value));
   },
-  { debounce: 100, immediate: true }
+  { immediate: true }
 );
 
 const rules = {
@@ -27,10 +26,12 @@ const rules = {
 const { form, validate } = useForm();
 const loading = ref(false);
 
-const refresh = () =>
-  menu
-    .refresh()
-    .then(() => router.replace("/navigation"))
+const handleReturn = () =>
+  getNavigation()
+    .then((res) => {
+      menu.list = res;
+      router.replace("/navigation");
+    })
     .finally(() => (loading.value = false));
 
 const create = () =>
@@ -42,7 +43,7 @@ const create = () =>
         body: formData.value,
       })
     )
-    .then(refresh);
+    .then(handleReturn);
 
 const update = () =>
   validate()
@@ -53,7 +54,7 @@ const update = () =>
         body: formData.value,
       })
     )
-    .then(refresh);
+    .then(handleReturn);
 
 const remove = () =>
   ElMessageBox.confirm("此操作将永久删除该条目, 是否继续?", {
@@ -66,7 +67,7 @@ const remove = () =>
         query: { id: route.query.id },
       })
     )
-    .then(refresh);
+    .then(handleReturn);
 </script>
 
 <template>
@@ -95,23 +96,6 @@ const remove = () =>
           v-model="formData.url"
           style="max-width: 30rem"
           @change="formData.url = formData.url?.trim()"
-        />
-      </ElFormItem>
-      <ElFormItem prop="sort" label="顺序">
-        <ElInputNumber v-model="formData.sort" />
-      </ElFormItem>
-      <ElFormItem prop="visible" label="状态">
-        <ElSwitch
-          v-model="formData.visible"
-          active-text="显示"
-          inactive-text="隐藏"
-        />
-      </ElFormItem>
-      <ElFormItem prop="public" label="权限">
-        <ElSwitch
-          v-model="formData.public"
-          active-text="公开"
-          inactive-text="私有"
         />
       </ElFormItem>
       <ElFormItem class="mt-6">

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IconEdit } from "@tabler/icons-vue";
+import { IconPencil } from "@tabler/icons-vue";
 import { NuxtLink } from "#components";
 
 const menu = useMenuStore();
@@ -16,48 +16,29 @@ const menu = useMenuStore();
         <ElButton type="primary" plain style="width: 5rem"> 新增 </ElButton>
       </NuxtLink>
     </div>
-    <div class="overflow-x-auto px-2 pb-6">
-      <ElTable style="min-width: 50rem" :data="menu.menus || []">
+    <div class="mx-auto max-w-3xl overflow-x-auto px-2 pb-6">
+      <ElTable style="min-width: 30rem" :data="menu.list">
         <ElTableColumn
           show-overflow-tooltip
           prop="title"
-          width="200"
+          width="180"
           label="标题"
-        />
+        >
+          <template #default="{ row }">
+            <NuxtLink
+              :to="`/navigation/edit?id=${row.id}`"
+              class="flex items-center gap-1 hover:underline"
+            >
+              {{ row.title }}
+              <IconPencil :size="16" />
+            </NuxtLink>
+          </template>
+        </ElTableColumn>
         <ElTableColumn show-overflow-tooltip label="链接">
           <template #default="{ row }">
             <ElLink class="whitespace-nowrap" :href="row.url" target="_blank">
               {{ row.url }}
             </ElLink>
-          </template>
-        </ElTableColumn>
-        <ElTableColumn width="60" label="排序">
-          <template #default="{ row }">
-            {{ row.sort || 0 }}
-          </template>
-        </ElTableColumn>
-        <ElTableColumn width="70" label="可见">
-          <template #default="{ row }">
-            <ElTag v-if="row.visible" type="success">可见</ElTag>
-            <ElTag v-else type="danger">隐藏</ElTag>
-          </template>
-        </ElTableColumn>
-        <ElTableColumn width="70" label="公开">
-          <template #default="{ row }">
-            <ElTag v-if="row.public">公开</ElTag>
-            <ElTag v-else type="warning">私有</ElTag>
-          </template>
-        </ElTableColumn>
-        <ElTableColumn width="60" label="操作">
-          <template #default="{ row }">
-            <ElButton
-              bg
-              text
-              :tag="NuxtLink"
-              :to="`/navigation/edit?id=${row.id}`"
-              size="small"
-              :icon="IconEdit"
-            />
           </template>
         </ElTableColumn>
       </ElTable>
