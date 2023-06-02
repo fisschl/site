@@ -46,7 +46,7 @@ onBeforeUnmount(() => {
 const msg = ref("");
 
 onMounted(async () => {
-  msg.value = "引擎初始化中";
+  msg.value = "引擎初始化";
   engine.value = await createEngine();
   const scene = new Scene(engine.value);
   scene.clearColor = new Color4(0.1, 0.1, 0.1);
@@ -66,9 +66,8 @@ onMounted(async () => {
 
   const light1 = new HemisphericLight("light1", new Vector3(0, 1, 0), scene);
   light1.intensity = 2;
-
-  msg.value = "模型加载中";
-  await SceneLoader.ImportMeshAsync("", "/3d/irena/", "scene.gltf", scene);
+  msg.value = "模型加载";
+  await SceneLoader.ImportMeshAsync("", "//cdn.fisschl.world/3d/irena/", "scene.gltf", scene);
 
   const pipeline = new DefaultRenderingPipeline();
   pipeline.samples = 4;
