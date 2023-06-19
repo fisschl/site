@@ -67,7 +67,12 @@ onMounted(async () => {
   const light1 = new HemisphericLight("light1", new Vector3(0, 1, 0), scene);
   light1.intensity = 2;
   msg.value = "模型加载";
-  await SceneLoader.ImportMeshAsync("", "//cdn.fisschl.world/3d/irena/", "scene.gltf", scene);
+  await SceneLoader.ImportMeshAsync(
+    "",
+    "//cdn.fisschl.world/3d/irena/",
+    "scene.gltf",
+    scene
+  );
 
   const pipeline = new DefaultRenderingPipeline();
   pipeline.samples = 4;

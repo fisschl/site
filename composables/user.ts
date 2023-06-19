@@ -24,7 +24,7 @@ export const useUserStore = defineStore("user", () => {
   };
 });
 
-export const HOST = "//fisschl.world/api";
+export const HOST = "https://fisschl.world/api";
 export const LOGIN_URL = HOST + "/login";
 export const LOGOUT_URL = HOST + "/logout";
 

@@ -59,10 +59,6 @@ const reset = () => formData.reset();
 
 <template>
   <main>
-    <ElBreadcrumb class="mx-4 mb-2 mt-3">
-      <ElBreadcrumbItem to="/">首页</ElBreadcrumbItem>
-      <ElBreadcrumbItem>热搜分析</ElBreadcrumbItem>
-    </ElBreadcrumb>
     <form
       class="mx-auto mb-4 mt-6 flex max-w-4xl flex-wrap justify-end gap-2 px-4"
     >
