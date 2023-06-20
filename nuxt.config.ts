@@ -11,6 +11,9 @@ export default defineNuxtConfig({
     head: {
       title: "My Site",
       meta: [{ name: "description", content: "My amazing site." }],
+      htmlAttrs: {
+        lang: "zh",
+      },
     },
     pageTransition: { name: "page", mode: "out-in" },
     layoutTransition: { name: "page", mode: "out-in" },

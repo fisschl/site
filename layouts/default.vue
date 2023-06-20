@@ -2,10 +2,10 @@
 import { Icon3dCubeSphere } from "@tabler/icons-vue";
 import {
   IconBoxSeam,
-  IconBrandGithub,
   IconCloudSearch,
   IconHome,
   IconMoon,
+  IconMoodWink,
   IconSun,
   IconUserUp,
 } from "@tabler/icons-vue";
@@ -16,16 +16,7 @@ const BackToTop = defineAsyncComponent(
 const PageFooter = defineAsyncComponent(
   () => import("~/components/PageFooter.vue")
 );
-const store = useHandleLogin();
-
-const handleClickLogin = () =>
-  store.isLogin ? (location.href = "https://github.com") : fetchLogin();
-
-const isNavVisible = ref(false);
-const route = useRoute();
-watchEffect(() => {
-  isNavVisible.value = route.path === "/";
-});
+const userStore = useHandleLogin();
 
 const { changeTheme, isDark } = useTheme();
 </script>
@@ -43,31 +34,36 @@ const { changeTheme, isDark } = useTheme();
             <IconMoon v-else class="icon-moon" :size="20" />
           </ElButton>
         </ClientOnly>
-        <ElButton text @click="handleClickLogin">
-          <IconUserUp v-if="!store.isLogin" :size="20" />
-          <IconBrandGithub v-if="store.isLogin" :size="20" />
-        </ElButton>
+        <NuxtLink v-if="!userStore.user" to="/login">
+          <ElButton text>
+            <IconUserUp :size="20" />
+          </ElButton>
+        </NuxtLink>
+        <NuxtLink v-else to="/user">
+          <ElButton text>
+            <IconMoodWink :size="20" class="mr-2" />
+            {{ userStore.user.name }}
+          </ElButton>
+        </NuxtLink>
       </nav>
-      <ClientOnly>
-        <ElMenu mode="horizontal" class="h-10" router>
-          <ElMenuItem index="/">
-            <IconHome :size="20" class="mr-2" />
-            主页
-          </ElMenuItem>
-          <ElMenuItem index="/store">
-            <IconBoxSeam :size="20" class="mr-2" />
-            文件库
-          </ElMenuItem>
-          <ElMenuItem index="/topsearch">
-            <IconCloudSearch :size="20" class="mr-2" />
-            热搜分析
-          </ElMenuItem>
-          <ElMenuItem index="/3d">
-            <Icon3dCubeSphere :size="20" class="mr-2" />
-            GPU
-          </ElMenuItem>
-        </ElMenu>
-      </ClientOnly>
+      <ElMenu mode="horizontal" class="h-10" router>
+        <ElMenuItem index="/">
+          <IconHome :size="20" class="mr-2" />
+          主页
+        </ElMenuItem>
+        <ElMenuItem index="/store">
+          <IconBoxSeam :size="20" class="mr-2" />
+          文件库
+        </ElMenuItem>
+        <ElMenuItem index="/topsearch">
+          <IconCloudSearch :size="20" class="mr-2" />
+          热搜分析
+        </ElMenuItem>
+        <ElMenuItem index="/3d">
+          <Icon3dCubeSphere :size="20" class="mr-2" />
+          GPU
+        </ElMenuItem>
+      </ElMenu>
       <slot></slot>
       <BackToTop />
       <PageFooter />

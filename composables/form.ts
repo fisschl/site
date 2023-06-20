@@ -4,10 +4,11 @@ import { toValue } from "@vueuse/core";
 
 export const useDefaultRef = <T>(initialValue: T) => {
   const defaultData = ref(cloneDeep(toValue(initialValue)));
-  const data = Object.assign(ref(initialValue), {
-    reset: () => (data.value = cloneDeep(defaultData.value)),
-  });
-  return data;
+  const data = ref(initialValue);
+  const reset = () => {
+    data.value = cloneDeep(defaultData.value);
+  };
+  return { data, reset };
 };
 
 export const useForm = () => {

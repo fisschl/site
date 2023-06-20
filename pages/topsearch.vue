@@ -22,7 +22,7 @@ const { data: topSearchType } = useAsyncData(() =>
 );
 
 const page = ref(1);
-const formData = useDefaultRef<Partial<TopSearchItem>>({});
+const { data: formData, reset } = useDefaultRef<Partial<TopSearchItem>>({});
 
 const fetchData = () =>
   request<TopSearchResponse>("/topsearch", {
@@ -53,8 +53,6 @@ watchDebounced(
   },
   { debounce: 500, deep: true }
 );
-
-const reset = () => formData.reset();
 </script>
 
 <template>
