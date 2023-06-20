@@ -5,12 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@babylonjs/core':
-    specifier: ^6.8.0
-    version: 6.8.0
-  '@babylonjs/loaders':
-    specifier: ^6.8.0
-    version: 6.8.0(@babylonjs/core@6.8.0)(babylonjs-gltf2interface@6.8.0)
   '@element-plus/nuxt':
     specifier: ^1.0.5
     version: 1.0.5(@element-plus/icons-vue@2.1.0)(element-plus@2.3.6)
@@ -418,20 +412,6 @@ packages:
       '@babel/helper-string-parser': 7.22.5
       '@babel/helper-validator-identifier': 7.22.5
       to-fast-properties: 2.0.0
-    dev: false
-
-  /@babylonjs/core@6.8.0:
-    resolution: {integrity: sha512-wTWj9TsnVGqfXt+tXKi7+SIWi4MzBMwIq+jcylRR1qzHTHFfMuKrRRLZJ5jQtpAhcDPI2TOuJ3/NOccPyawlgQ==}
-    dev: false
-
-  /@babylonjs/loaders@6.8.0(@babylonjs/core@6.8.0)(babylonjs-gltf2interface@6.8.0):
-    resolution: {integrity: sha512-Ze3dsjwQ6ORYTkbacdlZVeN1PvC0KYcN2hzDNAqiQ0eeQkk96QDusgLkVHMM1UW55hS5PQefTua7iylOxWetDw==}
-    peerDependencies:
-      '@babylonjs/core': ^6.0.0
-      babylonjs-gltf2interface: ^6.0.0
-    dependencies:
-      '@babylonjs/core': 6.8.0
-      babylonjs-gltf2interface: 6.8.0
     dev: false
 
   /@cloudflare/kv-asset-handler@0.3.0:
@@ -2442,10 +2422,6 @@ packages:
       form-data: 4.0.0
     transitivePeerDependencies:
       - debug
-    dev: false
-
-  /babylonjs-gltf2interface@6.8.0:
-    resolution: {integrity: sha512-uCehLc8CnMUvWYttqQmJCHnhUjoftb4gK6Q+GXclgNr3CWiNDXHnbiBZQynA8SBfgkgE3bRk1+u+J5PQwkOepQ==}
     dev: false
 
   /balanced-match@1.0.2:
