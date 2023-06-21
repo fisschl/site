@@ -2,16 +2,13 @@
 
 <template>
   <main>
-    <section class="shici-box mx-auto my-10 max-w-4xl px-4">
-      <JinRiShiCi class="my-10" />
-    </section>
+    <JinRiShiCi class="shici-box max-w-4xl px-4" />
   </main>
 </template>
 
 <style scoped>
 .shici-box {
-  height: calc(100vh - 10rem);
-  display: flex;
-  align-items: center;
+  min-height: calc(100vh - 10rem);
+  margin: 10rem auto;
 }
 </style>
