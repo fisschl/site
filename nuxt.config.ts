@@ -14,6 +14,12 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: "zh",
       },
+      script: [
+        {
+          src: "https://sdk.jinrishici.com/v2/browser/jinrishici.js",
+          async: true,
+        },
+      ],
     },
     pageTransition: { name: "page", mode: "out-in" },
     layoutTransition: { name: "page", mode: "out-in" },

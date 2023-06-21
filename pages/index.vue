@@ -2,13 +2,16 @@
 
 <template>
   <main>
-    <section class="mx-auto my-10 max-w-4xl px-4">
+    <section class="shici-box mx-auto my-10 max-w-4xl px-4">
       <JinRiShiCi class="my-10" />
-      <img
-        src="https://tenapi.cn/v2/bing"
-        class="block rounded"
-        alt="必应每日壁纸"
-      />
     </section>
   </main>
 </template>
+
+<style scoped>
+.shici-box {
+  height: calc(100vh - 10rem);
+  display: flex;
+  align-items: center;
+}
+</style>

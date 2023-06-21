@@ -1,18 +1,10 @@
 <script setup lang="ts">
-import { Icon3dCubeSphere } from "@tabler/icons-vue";
-import {
-  IconBoxSeam,
-  IconCloudSearch,
-  IconHome,
-  IconMoon,
-  IconMoodWink,
-  IconSun,
-  IconUserUp,
-} from "@tabler/icons-vue";
+import { IconMoodWink, IconMoon, IconSun, IconUserUp } from "@tabler/icons-vue";
 
 const BackToTop = defineAsyncComponent(
   () => import("~/components/BackToTop.vue")
 );
+const AppMenu = defineAsyncComponent(() => import("~/components/AppMenu.vue"));
 const PageFooter = defineAsyncComponent(
   () => import("~/components/PageFooter.vue")
 );
@@ -46,24 +38,7 @@ const { changeTheme, isDark } = useTheme();
           </ElButton>
         </NuxtLink>
       </nav>
-      <ElMenu mode="horizontal" class="h-10" router>
-        <ElMenuItem index="/">
-          <IconHome :size="20" class="mr-2" />
-          主页
-        </ElMenuItem>
-        <ElMenuItem index="/store">
-          <IconBoxSeam :size="20" class="mr-2" />
-          文件库
-        </ElMenuItem>
-        <ElMenuItem index="/topsearch">
-          <IconCloudSearch :size="20" class="mr-2" />
-          热搜分析
-        </ElMenuItem>
-        <ElMenuItem index="/3d">
-          <Icon3dCubeSphere :size="20" class="mr-2" />
-          GPU
-        </ElMenuItem>
-      </ElMenu>
+      <AppMenu />
       <slot></slot>
       <BackToTop />
       <PageFooter />

@@ -1,14 +1,44 @@
 <script setup lang="ts">
-const id = "jinrishici-script";
+export interface Origin {
+  title: string;
+  dynasty: string;
+  author: string;
+  content: string[];
+}
+
+export interface Data {
+  content: string;
+  origin: Origin;
+}
+
+declare global {
+  interface Window {
+    jinrishici: {
+      load: (cb: (result: { data: Data }) => void) => void;
+    };
+  }
+}
+
+const jinrishici = ref<Data>();
+
 onMounted(() => {
-  document.getElementById(id)?.remove();
-  const script = document.createElement("script");
-  script.src = "https://sdk.jinrishici.com/v2/browser/jinrishici.js";
-  script.id = id;
-  document.body.appendChild(script);
+  window.jinrishici.load((res) => {
+    jinrishici.value = res.data;
+  });
 });
 </script>
 
 <template>
-  <p class="jinrishici-sentence LXGWWenKai text-center text-xl"></p>
+  <article v-if="jinrishici" class="LXGWWenKai text-center">
+    <h3 class="mb-2 text-lg font-medium">
+      {{ jinrishici.origin.title }}
+    </h3>
+    <p class="mb-4 text-gray-400">
+      {{ jinrishici.origin.dynasty }}
+      {{ jinrishici.origin.author }}
+    </p>
+    <p v-for="p in jinrishici.origin.content" :key="p" class="text-lg">
+      {{ p }}
+    </p>
+  </article>
 </template>

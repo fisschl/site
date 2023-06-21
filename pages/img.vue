@@ -1,0 +1,21 @@
+<script setup lang="ts">
+const imgList = [
+  "https://api.btstu.cn/sjbz/api.php?lx=dongman",
+  "https://img.xjh.me/random_img.php?return=302",
+];
+</script>
+
+<template>
+  <main class="relative">
+    <img src="https://api.paugram.com/wallpaper" class="w-full" alt="壁纸" />
+    <div class="absolute top-0 h-full w-full overflow-auto px-4">
+      <img
+        v-for="img in imgList"
+        :key="img"
+        :src="img"
+        alt="随机图片"
+        class="my-3 max-w-md rounded shadow"
+      />
+    </div>
+  </main>
+</template>
