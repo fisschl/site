@@ -11,7 +11,6 @@ const formData = reactive({
 const submit = (prop: keyof UserItem) => {
   const body: Partial<UserItem> = {};
   body[prop] = formData[prop];
-  body.id = formData.id;
   return request("/user", {
     method: "PUT",
     body,
