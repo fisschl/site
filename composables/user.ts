@@ -35,17 +35,3 @@ export interface Page {
   size: number; // 每页的记录数
   total?: number; // 总记录数
 }
-
-export const useHandleLogin = () => {
-  const store = useUserStore();
-  /**
-   * 处理登录逻辑
-   */
-  onMounted(() => {
-    request("/user").then((res) => {
-      store.user = res;
-    });
-  });
-
-  return store;
-};

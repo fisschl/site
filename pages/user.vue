@@ -8,16 +8,15 @@ const formData = reactive({
   password: undefined,
 });
 
-const submit = (prop: keyof UserItem) => {
+const submit = async (prop: keyof UserItem) => {
   const body: Partial<UserItem> = {};
   body[prop] = formData[prop];
-  return request("/user", {
+  const res = await request("/user", {
     method: "PUT",
     body,
-  }).then((res) => {
-    ElMessage.success("修改成功");
-    userStore.user = res;
   });
+  ElMessage.success("修改成功");
+  userStore.user = res;
 };
 </script>
 

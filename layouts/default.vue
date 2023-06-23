@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { IconMoodWink, IconMoon, IconSun, IconUserUp } from "@tabler/icons-vue";
-
 const BackToTop = defineAsyncComponent(
   () => import("~/components/BackToTop.vue")
 );
@@ -8,9 +6,21 @@ const AppMenu = defineAsyncComponent(() => import("~/components/AppMenu.vue"));
 const PageFooter = defineAsyncComponent(
   () => import("~/components/PageFooter.vue")
 );
-const userStore = useHandleLogin();
+const ThemeButton = defineAsyncComponent(
+  () => import("~/components/ThemeButton.vue")
+);
+const UserMenu = defineAsyncComponent(
+  () => import("~/components/UserMenu.vue")
+);
 
-const { changeTheme, isDark } = useTheme();
+const userStore = useUserStore();
+/**
+ * 处理登录逻辑
+ */
+onMounted(async () => {
+  const res = await request("/user");
+  userStore.user = res;
+});
 </script>
 
 <template>
@@ -20,23 +30,8 @@ const { changeTheme, isDark } = useTheme();
         <h1 class="LXGWWenKai flex-1 text-lg font-medium">
           大道之行也 天下为公
         </h1>
-        <ClientOnly>
-          <ElButton text @click="changeTheme">
-            <IconSun v-if="isDark" class="icon-sun" :size="20" />
-            <IconMoon v-else class="icon-moon" :size="20" />
-          </ElButton>
-        </ClientOnly>
-        <NuxtLink v-if="!userStore.user" to="/login">
-          <ElButton text>
-            <IconUserUp :size="20" />
-          </ElButton>
-        </NuxtLink>
-        <NuxtLink v-else to="/user">
-          <ElButton text>
-            <IconMoodWink :size="20" class="mr-2" />
-            {{ userStore.user.name }}
-          </ElButton>
-        </NuxtLink>
+        <ThemeButton />
+        <UserMenu />
       </nav>
       <AppMenu />
       <slot></slot>
