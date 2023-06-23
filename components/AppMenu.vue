@@ -4,7 +4,6 @@ import {
   IconBoxSeam,
   IconCloudSearch,
   IconHome,
-  IconPalette,
 } from "@tabler/icons-vue";
 </script>
 
@@ -25,10 +24,6 @@ import {
     <ElMenuItem index="/3d">
       <Icon3dCubeSphere :size="20" class="mr-2" />
       GPU
-    </ElMenuItem>
-    <ElMenuItem index="/img">
-      <IconPalette :size="20" class="mr-2" />
-      图片
     </ElMenuItem>
   </ElMenu>
 </template>
