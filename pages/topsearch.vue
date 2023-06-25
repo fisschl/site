@@ -1,4 +1,4 @@
-<script lang="ts">
+<script setup lang="ts">
 import { IconReload } from "@tabler/icons-vue";
 import type { ElSkeleton } from "element-plus";
 import { Page } from "~/composables/user";
@@ -11,14 +11,16 @@ interface TopSearchItem {
   update_time: string;
 }
 
-export interface TopSearchResponse extends Required<Page> {
+interface TopSearchResponse extends Required<Page> {
   list: TopSearchItem[];
 }
-</script>
 
-<script setup lang="ts">
 const { data: topSearchType } = useAsyncData(() =>
-  request<string[]>("/topsearchtype")
+  request<string[]>("/topsearchtype", {
+    query: {
+      cache: 60 * 60 * 24 * 7,
+    },
+  })
 );
 
 const page = ref(1);
@@ -26,7 +28,14 @@ const { data: formData, reset } = useDefaultRef<Partial<TopSearchItem>>({});
 
 const fetchData = () =>
   request<TopSearchResponse>("/topsearch", {
-    query: { page: page.value++, size: 20, ...formData.value },
+    query: {
+      page: page.value++,
+      size: 20,
+      ...formData.value,
+      query: {
+        cache: 60 * 60 * 24,
+      },
+    },
   }).then((res) =>
     res.list.map((item) => {
       item.update_time = formatShowTime(item.update_time);
