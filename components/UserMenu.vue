@@ -11,7 +11,7 @@ const handleCommand = async (command: string) => {
     password: "",
   });
   switch (command) {
-    case "修改个人信息":
+    case "修改个人信息": {
       const changeKey = new Set<keyof typeof formData>();
       const setChangeKey = (key: keyof typeof formData) => changeKey.add(key);
       return ElMessageBox({
@@ -59,6 +59,7 @@ const handleCommand = async (command: string) => {
         .catch(() => {
           ElMessage.info("取消");
         });
+    }
     case "修改密码":
       return ElMessageBox({
         title: "修改密码",

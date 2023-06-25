@@ -32,16 +32,14 @@ const fetchData = () =>
       page: page.value++,
       size: 20,
       ...formData.value,
-      query: {
-        cache: 60 * 60 * 24,
-      },
+      cache: 60 * 60 * 24,
     },
-  }).then((res) =>
-    res.list.map((item) => {
+  }).then((res) => {
+    return res.list.map((item) => {
       item.update_time = formatShowTime(item.update_time);
       return item;
-    })
-  );
+    });
+  });
 
 const { refresh, data } = useAsyncData(() => {
   page.value = 1;
