@@ -38,6 +38,7 @@ const logon = async () => {
     .then((res) => {
       localStorage.setItem("token", res.token);
       userStore.user = res.user;
+      router.replace("/");
     })
     .catch(() => {
       ElMessage.warning("用户名已存在");
