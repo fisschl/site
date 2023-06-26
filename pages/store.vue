@@ -4,5 +4,5 @@ definePageMeta({
 });
 </script>
 <template>
-  <iframe src="https://store.fisschl.world" class="h-screen w-screen"></iframe>
+  <WebFrame src="https://store.fisschl.world" fullscreen />
 </template>

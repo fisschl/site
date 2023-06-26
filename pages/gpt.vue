@@ -4,5 +4,5 @@ definePageMeta({
 });
 </script>
 <template>
-  <WebFrame src="https://fisschl.world/gpu" fullscreen />
+  <WebFrame src="https://gpt.fisschl.world" fullscreen />
 </template>

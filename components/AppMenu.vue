@@ -2,6 +2,7 @@
 import {
   Icon3dCubeSphere,
   IconBoxSeam,
+  IconBrandOpenai,
   IconCloudSearch,
   IconHome,
 } from "@tabler/icons-vue";
@@ -24,6 +25,10 @@ import {
     <ElMenuItem index="/3d">
       <Icon3dCubeSphere :size="20" class="mr-2" />
       GPU
+    </ElMenuItem>
+    <ElMenuItem index="/gpt">
+      <IconBrandOpenai :size="20" class="mr-2" />
+      GPT
     </ElMenuItem>
   </ElMenu>
 </template>
