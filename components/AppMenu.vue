@@ -18,7 +18,7 @@ import {
       <IconBoxSeam :size="20" class="mr-2" />
       文件库
     </ElMenuItem>
-    <ElMenuItem index="/topsearch">
+    <ElMenuItem index="/top-search">
       <IconCloudSearch :size="20" class="mr-2" />
       热搜分析
     </ElMenuItem>

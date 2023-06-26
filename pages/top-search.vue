@@ -16,7 +16,7 @@ interface TopSearchResponse extends Required<Page> {
 }
 
 const { data: topSearchType } = useAsyncData(() =>
-  request<string[]>("/topsearchtype", {
+  request<string[]>("/top-search-type", {
     query: {
       cache: 60 * 60 * 24 * 7,
     },
@@ -27,7 +27,7 @@ const page = ref(1);
 const { data: formData, reset } = useDefaultRef<Partial<TopSearchItem>>({});
 
 const fetchData = () =>
-  request<TopSearchResponse>("/topsearch", {
+  request<TopSearchResponse>("/top-search", {
     query: {
       page: page.value++,
       size: 20,
