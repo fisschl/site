@@ -15,15 +15,6 @@ const ThemeButton = defineAsyncComponent(
 const UserMenu = defineAsyncComponent(
   () => import("~/components/UserMenu.vue")
 );
-
-const userStore = useUserStore();
-/**
- * 处理登录逻辑
- */
-onMounted(async () => {
-  const res = await request("/user");
-  userStore.user = res;
-});
 </script>
 
 <template>
@@ -33,8 +24,12 @@ onMounted(async () => {
         <h1 class="LXGWWenKai flex-1 text-lg font-medium">
           大道之行也 天下为公
         </h1>
-        <ThemeButton />
-        <UserMenu />
+        <ClientOnly>
+          <ThemeButton />
+        </ClientOnly>
+        <ClientOnly>
+          <UserMenu />
+        </ClientOnly>
       </nav>
       <AppMenu />
       <slot></slot>

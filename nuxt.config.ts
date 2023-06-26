@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@pinia/nuxt",
     "@element-plus/nuxt",
+    "@vite-pwa/nuxt",
   ],
   app: {
     head: {
@@ -23,6 +24,12 @@ export default defineNuxtConfig({
     },
     pageTransition: { name: "page", mode: "out-in" },
     layoutTransition: { name: "page", mode: "out-in" },
+  },
+  pwa: {
+    registerType: "autoUpdate",
+    devOptions: {
+      enabled: true,
+    },
   },
   build: {
     transpile: [],

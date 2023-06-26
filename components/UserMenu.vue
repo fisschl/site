@@ -5,6 +5,14 @@ import { ElForm, ElFormItem, ElInput } from "element-plus";
 const userStore = useUserStore();
 const router = useRouter();
 
+/**
+ * 处理登录逻辑
+ */
+onMounted(async () => {
+  const res = await request("/user");
+  userStore.user = res;
+});
+
 const handleCommand = async (command: string) => {
   const formData = reactive({
     ...userStore.user,

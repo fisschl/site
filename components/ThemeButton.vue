@@ -38,10 +38,8 @@ const changeTheme = async (e: MouseEvent) => {
 </script>
 
 <template>
-  <ClientOnly>
-    <ElButton text @click="changeTheme">
-      <IconSun v-if="isDark" class="icon-sun" :size="20" />
-      <IconMoon v-else class="icon-moon" :size="20" />
-    </ElButton>
-  </ClientOnly>
+  <ElButton text @click="changeTheme">
+    <IconSun v-if="isDark" class="icon-sun" :size="20" />
+    <IconMoon v-else class="icon-moon" :size="20" />
+  </ElButton>
 </template>
