@@ -8,9 +8,16 @@ const router = useRouter();
 /**
  * 处理登录逻辑
  */
-onMounted(async () => {
-  const res = await request("/user");
-  userStore.user = res;
+onMounted(() => {
+  if (!localStorage.getItem("token")) return;
+  return request("/user")
+    .then((res) => {
+      userStore.user = res;
+    })
+    .catch(() => {
+      localStorage.removeItem("token");
+      userStore.user = undefined;
+    });
 });
 
 const handleCommand = async (command: string) => {
