@@ -1,7 +1,4 @@
-<script setup lang="ts">
-import "~/assets/base.css";
-import "~/assets/transition.css";
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <NuxtLayout>

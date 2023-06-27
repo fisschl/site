@@ -43,3 +43,11 @@ const changeTheme = async (e: MouseEvent) => {
     <IconMoon v-else class="icon-moon" :size="20" />
   </ElButton>
 </template>
+
+<style>
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+</style>

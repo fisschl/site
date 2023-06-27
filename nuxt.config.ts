@@ -1,4 +1,5 @@
 export default defineNuxtConfig({
+  css: ["@/assets/base.css", "@/assets/page-transition.css"],
   modules: [
     "@nuxtjs/tailwindcss",
     "@nuxt/devtools",
@@ -14,6 +15,22 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: "zh",
       },
+      link: [
+        {
+          rel: "preconnect",
+          href: "https://cdn.fisschl.world",
+        },
+        {
+          rel: "stylesheet",
+          href: "https://cdn.fisschl.world/HarmonyOS_Sans_SC/font.css",
+          crossorigin: "anonymous",
+        },
+        {
+          rel: "stylesheet",
+          href: "https://cdn.fisschl.world/LXGWWenKai/font.css",
+          crossorigin: "anonymous",
+        },
+      ],
       script: [
         {
           src: "https://sdk.jinrishici.com/v2/browser/jinrishici.js",
