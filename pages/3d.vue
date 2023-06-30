@@ -1,8 +1,0 @@
-<script setup lang="ts">
-definePageMeta({
-  layout: false,
-});
-</script>
-<template>
-  <WebFrame src="https://fisschl.world/gpu" fullscreen />
-</template>
