@@ -34,16 +34,10 @@ const MenuList = [
     path: "https://gpt.fisschl.world",
   },
 ];
-
-const route = useRoute();
-
-const active = computed(() => {
-  return route.matched[0].path;
-});
 </script>
 
 <template>
-  <ElMenu mode="horizontal" class="h-10" :default-active="active">
+  <ElMenu mode="horizontal" class="h-10" :default-active="$route.path">
     <ElMenuItem
       v-for="item in MenuList"
       :key="item.path"
