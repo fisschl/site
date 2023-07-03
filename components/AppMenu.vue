@@ -26,7 +26,7 @@ const MenuList = [
   {
     name: "GPU",
     icon: Icon3dCubeSphere,
-    path: "https://fisschl.world/gpu",
+    path: "https://fisschl.world/pages/gpu",
   },
   {
     name: "GPT",
