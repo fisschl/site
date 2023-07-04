@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inputAvatar } from "utils/img";
+import { inputAvatar } from "~/utils/img";
 
 const props = defineProps<{
   modelValue: string | undefined;
