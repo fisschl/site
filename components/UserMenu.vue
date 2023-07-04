@@ -12,6 +12,7 @@ onMounted(() => {
   if (!localStorage.getItem("token")) return;
   return request("/user")
     .then((res) => {
+      res.image ||= "";
       userStore.user = res;
     })
     .catch(() => {
@@ -30,7 +31,7 @@ const changeKey = new Set<keyof typeof formData>();
 const setChangeKey = (key: keyof typeof formData) => changeKey.add(key);
 
 const handleSubmitUserEdit = () => {
-  if (!changeKey.size) throw new Error("未修改");
+  if (!changeKey.size) return (isShowUserEdit.value = false);
   const body = Object.fromEntries(
     Array.from(changeKey).map((key) => [key, formData[key]])
   );
