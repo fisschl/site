@@ -17,6 +17,8 @@ const activeTab = ref("登录");
 const router = useRouter();
 const login = async () => {
   await validate();
+  formData.name = formData.name?.trim();
+  formData.password = formData.password?.trim();
   return request("/login", {
     query: formData,
   })
@@ -32,6 +34,8 @@ const login = async () => {
 
 const logon = async () => {
   await validate();
+  formData.name = formData.name?.trim();
+  formData.password = formData.password?.trim();
   return request("/logon", {
     method: "POST",
     body: formData,

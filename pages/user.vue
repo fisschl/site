@@ -11,6 +11,8 @@ const formData = reactive({
 const submit = async (prop: keyof UserItem) => {
   const body: Partial<UserItem> = {};
   body[prop] = formData[prop];
+  body.name = body.name?.trim();
+  body.password = body.password?.trim();
   const res = await request("/user", {
     method: "PUT",
     body,
