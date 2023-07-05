@@ -15,7 +15,7 @@ export default defineNuxtConfig({
   ],
   app: {
     head: {
-      title: "My Site",
+      title: "主站",
       meta: [{ name: "description", content: "My amazing site." }],
       htmlAttrs: {
         lang: "zh",
