@@ -4,6 +4,7 @@ import {
   IconBoxSeam,
   IconBrandOpenai,
   IconCloudSearch,
+  IconAnkh,
   IconHome,
 } from "@tabler/icons-vue";
 
@@ -32,6 +33,11 @@ const MenuList = [
     name: "GPT",
     icon: IconBrandOpenai,
     path: "https://gpt.fisschl.world",
+  },
+  {
+    name: "电子木鱼",
+    icon: IconAnkh,
+    path: "/muyu",
   },
 ];
 </script>

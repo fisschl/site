@@ -42,6 +42,10 @@ export default defineNuxtConfig({
           async: true,
           id: "jinrishici-script",
         },
+        {
+          src: "https://cdn.jsdelivr.net/npm/canvas-confetti/dist/confetti.browser.min.js",
+          async: true,
+        },
       ],
     },
     pageTransition: { name: "page", mode: "out-in" },
