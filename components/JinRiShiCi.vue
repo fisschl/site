@@ -13,18 +13,22 @@ export interface Data {
 
 declare global {
   interface Window {
-    jinrishici: {
-      load: (cb: (result: { data: Data }) => void) => void;
-    };
+    jinrishici: any;
   }
 }
 
 const jinrishici = ref<Data>();
 
-onMounted(() => {
-  window.jinrishici.load((res) => {
+const load = () => {
+  window.jinrishici.load((res: { data: Data }) => {
     jinrishici.value = res.data;
   });
+};
+
+onMounted(() => {
+  if (window.jinrishici) return load();
+  const script = document.getElementById("jinrishici-script");
+  script?.addEventListener("load", load);
 });
 </script>
 

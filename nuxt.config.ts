@@ -40,6 +40,7 @@ export default defineNuxtConfig({
         {
           src: "https://sdk.jinrishici.com/v2/browser/jinrishici.js",
           async: true,
+          id: "jinrishici-script",
         },
       ],
     },
