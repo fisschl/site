@@ -34,7 +34,7 @@ onMounted(() => {
 
 <template>
   <article v-if="jinrishici" class="LXGWWenKai text-center">
-    <h3 class="mb-2 text-lg font-medium">
+    <h3 class="mb-2 text-xl font-medium">
       {{ jinrishici.origin.title }}
     </h3>
     <p class="mb-4 text-gray-400">

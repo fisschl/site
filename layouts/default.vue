@@ -12,9 +12,6 @@ const PageFooter = defineAsyncComponent(
 const ThemeButton = defineAsyncComponent(
   () => import("~/components/ThemeButton.vue")
 );
-const UserMenu = defineAsyncComponent(
-  () => import("~/components/UserMenu.vue")
-);
 </script>
 
 <template>
@@ -27,9 +24,7 @@ const UserMenu = defineAsyncComponent(
         <ClientOnly>
           <ThemeButton />
         </ClientOnly>
-        <ClientOnly>
-          <UserMenu />
-        </ClientOnly>
+        <UserMenu />
       </nav>
       <AppMenu />
       <slot></slot>
