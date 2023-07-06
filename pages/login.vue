@@ -72,12 +72,17 @@ const [DefineTemplate, ReuseTemplate] =
         @submit.prevent="buttonAction"
       >
         <ElFormItem label="用户名" prop="name">
-          <ElInput v-model="formData.name" placeholder="请输入用户名" />
+          <ElInput
+            v-model="formData.name"
+            name="name"
+            placeholder="请输入用户名"
+          />
         </ElFormItem>
         <ElFormItem label="密码" prop="password">
           <ElInput
             v-model="formData.password"
             type="password"
+            name="password"
             placeholder="请输入密码"
             show-password
           />
