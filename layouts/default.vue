@@ -5,12 +5,14 @@ import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 const BackToTop = defineAsyncComponent(
   () => import("~/components/BackToTop.vue")
 );
-const AppMenu = defineAsyncComponent(() => import("~/components/AppMenu.vue"));
 const PageFooter = defineAsyncComponent(
   () => import("~/components/PageFooter.vue")
 );
 const ThemeButton = defineAsyncComponent(
   () => import("~/components/ThemeButton.vue")
+);
+const UserMenu = defineAsyncComponent(
+  () => import("~/components/UserMenu.vue")
 );
 </script>
 
@@ -24,7 +26,9 @@ const ThemeButton = defineAsyncComponent(
         <ClientOnly>
           <ThemeButton />
         </ClientOnly>
-        <UserMenu />
+        <ClientOnly>
+          <UserMenu />
+        </ClientOnly>
       </nav>
       <AppMenu />
       <slot></slot>

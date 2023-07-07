@@ -44,6 +44,18 @@ const handleSubmitUserEdit = () => {
   });
 };
 
+const isShowChangePassword = ref(false);
+
+const handleSubmitPassword = () => {
+  if (!formData.password) return ElMessage.info("请输入新密码");
+  return request("/user", {
+    method: "PUT",
+    body: { password: formData.password },
+  }).then(() => {
+    ElMessage.success("修改成功");
+  });
+};
+
 const handleCommand = async (command: string) => {
   switch (command) {
     case "修改个人信息":
@@ -52,44 +64,9 @@ const handleCommand = async (command: string) => {
       isShowUserEdit.value = true;
       return;
     case "修改密码":
-      return ElMessageBox({
-        title: "修改密码",
-        message: () =>
-          h(
-            ElForm,
-            {
-              labelPosition: "top",
-              model: formData,
-            },
-            () =>
-              h(
-                ElFormItem,
-                {
-                  label: "新密码",
-                  prop: "password",
-                },
-                () =>
-                  h(ElInput, {
-                    placeholder: "请输入新密码",
-                    type: "password",
-                    showPassword: true,
-                    modelValue: formData.password,
-                    "onUpdate:modelValue": (value: string) => {
-                      formData.password = value;
-                    },
-                  })
-              )
-          ),
-      })
-        .then(() =>
-          request("/user", {
-            method: "PUT",
-            body: { password: formData.password },
-          })
-        )
-        .then(() => {
-          ElMessage.success("修改成功");
-        });
+      formData.password = undefined;
+      isShowChangePassword.value = true;
+      return;
     case "退出登录":
       await request("/logout");
       localStorage.removeItem("token");
@@ -147,6 +124,26 @@ const handleCommand = async (command: string) => {
     </ElForm>
     <template #footer>
       <ElButton @click="isShowUserEdit = false"> 取消 </ElButton>
+      <ElButton type="primary" @click="handleSubmitUserEdit"> 确定 </ElButton>
+    </template>
+  </ElDialog>
+  <ElDialog v-model="isShowChangePassword" width="400px" title="修改密码">
+    <ElForm
+      :model="formData"
+      label-position="top"
+      @submit.prevent="handleSubmitPassword"
+    >
+      <ElFormItem label="新密码" prop="password">
+        <ElInput
+          v-model="formData.password"
+          type="password"
+          show-password
+          placeholder="请输入新密码"
+        />
+      </ElFormItem>
+    </ElForm>
+    <template #footer>
+      <ElButton @click="isShowChangePassword = false"> 取消 </ElButton>
       <ElButton type="primary" @click="handleSubmitUserEdit"> 确定 </ElButton>
     </template>
   </ElDialog>
