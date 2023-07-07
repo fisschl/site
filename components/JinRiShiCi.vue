@@ -34,14 +34,14 @@ onMounted(() => {
 
 <template>
   <article v-if="jinrishici" class="LXGWWenKai text-center">
-    <h3 class="mb-2 text-xl font-medium">
+    <h3 class="mb-3 text-xl font-medium">
       {{ jinrishici.origin.title }}
     </h3>
-    <p class="mb-4 text-gray-400">
+    <p class="mb-5 text-gray-400">
       {{ jinrishici.origin.dynasty }}
       {{ jinrishici.origin.author }}
     </p>
-    <p v-for="p in jinrishici.origin.content" :key="p" class="text-lg">
+    <p v-for="p in jinrishici.origin.content" :key="p" class="m-3 text-lg">
       {{ p }}
     </p>
   </article>

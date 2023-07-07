@@ -1,15 +1,14 @@
 export default defineNuxtConfig({
-  css: ["@/assets/base.css", "@/assets/page-transition.css"],
   vue: {
     compilerOptions: {
       isCustomElement: (tag) => tag.startsWith("cropper-"),
     },
   },
   modules: [
-    "@nuxtjs/tailwindcss",
     "@nuxt/devtools",
     "@nuxtjs/color-mode",
     "@vueuse/nuxt",
+    "@unocss/nuxt",
     "@pinia/nuxt",
     "@element-plus/nuxt",
   ],
