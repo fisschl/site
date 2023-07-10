@@ -16,11 +16,7 @@ interface TopSearchResponse extends Required<Page> {
 }
 
 const { data: topSearchType } = useAsyncData(() =>
-  request<string[]>("/top-search-type", {
-    query: {
-      cache: 60 * 60 * 24 * 7,
-    },
-  })
+  request<string[]>("/top-search-type")
 );
 
 const page = ref(1);
@@ -32,7 +28,6 @@ const fetchData = () =>
       page: page.value++,
       size: 20,
       ...formData.value,
-      cache: 60 * 60 * 24,
     },
   }).then((res) => {
     return res.list.map((item) => {
