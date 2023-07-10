@@ -65,7 +65,7 @@ watchDebounced(
 <template>
   <main>
     <form
-      class="mx-auto mb-4 mt-6 flex max-w-4xl flex-wrap justify-end gap-2 px-4"
+      class="mx-auto mb-4 mt-6 max-w-4xl flex flex-wrap justify-end gap-2 px-4"
     >
       <ElInput
         v-model="formData.title"
@@ -92,7 +92,7 @@ watchDebounced(
         <IconReload :size="18" />
       </ElButton>
     </form>
-    <ol class="mx-auto max-w-4xl overflow-auto px-4">
+    <ol class="mx-auto max-w-4xl list-none overflow-auto px-4">
       <li
         v-for="item in data"
         :key="item.id"
