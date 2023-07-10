@@ -26,12 +26,3 @@ export const request = ofetch.create({
     headers.Authorization = localStorage.getItem("token");
   },
 });
-
-/**
- * 分页
- */
-export interface Page {
-  current: number; // 当前页码
-  size: number; // 每页的记录数
-  total?: number; // 总记录数
-}

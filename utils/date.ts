@@ -8,7 +8,7 @@ import { zhCN } from "date-fns/esm/locale";
 export const formatShowTime = (time: string) => {
   const date = parseJSON(time);
   const diff = differenceInDays(new Date(), date);
-  if (diff > 0) {
+  if (diff > 1) {
     return date.toLocaleString();
   }
   return formatDistanceToNowStrict(date, {
