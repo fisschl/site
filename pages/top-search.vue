@@ -21,13 +21,16 @@ const { data: topSearchType } = useAsyncData(() =>
 
 const page = ref(1);
 const { data: formData, reset } = useDefaultRef<Partial<TopSearchItem>>({});
+const dateRange = ref<[string, string]>(["", ""]);
 
 const fetchData = () =>
   request<TopSearchResponse>("/top-search", {
     query: {
       page: page.value++,
-      size: 20,
+      size: 60,
       ...formData.value,
+      start_time: dateRange.value[0] || undefined,
+      end_time: dateRange.value[1] || undefined,
     },
   }).then((res) => {
     return res.list.map((item) => {
@@ -36,19 +39,19 @@ const fetchData = () =>
     });
   });
 
-const { refresh, data } = useAsyncData(() => {
+const { refresh, data, pending } = useAsyncData(() => {
   page.value = 1;
   return fetchData();
 });
 
-const loadingBox = ref<InstanceType<typeof ElSkeleton> | null>(null);
+const loadingBox = ref<HTMLLIElement>();
 watch(useElementVisibility(loadingBox), async (visible) => {
   if (!visible) return;
   data.value?.push(...(await fetchData()));
 });
 
 watchDebounced(
-  formData,
+  () => [formData.value, dateRange.value],
   () => {
     data.value = [];
     return refresh();
@@ -68,26 +71,31 @@ watchDebounced(
         clearable
         style="max-width: 20rem"
       />
-      <ClientOnly>
-        <ElSelect
-          v-model="formData.type"
-          placeholder="类型"
-          clearable
-          style="max-width: 10rem"
-        >
-          <ElOption
-            v-for="item in topSearchType"
-            :key="item"
-            :label="item"
-            :value="item"
-          />
-        </ElSelect>
-      </ClientOnly>
+      <ElSelect
+        v-model="formData.type"
+        placeholder="类型"
+        clearable
+        style="max-width: 10rem"
+      >
+        <ElOption
+          v-for="item in topSearchType"
+          :key="item"
+          :label="item"
+          :value="item"
+        />
+      </ElSelect>
+      <ElDatePicker
+        v-model="dateRange"
+        type="daterange"
+        value-format="YYYY-MM-DD"
+        style="max-width: 17rem"
+      />
       <ElButton bg text title="重置" @click="reset">
         <IconReload :size="18" />
       </ElButton>
     </form>
-    <ol class="mx-auto max-w-4xl list-none overflow-auto px-4">
+    <ElEmpty v-if="!pending && !data?.length" class="mb-80 mt-30" />
+    <ol v-else class="mx-auto max-w-4xl list-none overflow-auto px-4">
       <li
         v-for="item in data"
         :key="item.id"
@@ -107,8 +115,8 @@ watchDebounced(
           {{ item.type }}
         </ElTag>
       </li>
-      <li>
-        <ElSkeleton ref="loadingBox" class="" :rows="20" animated />
+      <li ref="loadingBox">
+        <ElSkeleton class="" :rows="20" animated />
       </li>
     </ol>
   </main>
