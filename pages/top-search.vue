@@ -60,7 +60,7 @@ watchDeep(formData, () => (page.page = 1));
 <template>
   <main>
     <form
-      class="mx-auto mb-4 mt-6 max-w-4xl flex flex-wrap justify-end gap-2 px-4"
+      class="mx-auto mb-4 mt-6 flex max-w-4xl flex-wrap justify-end gap-2 px-4"
     >
       <ElInput
         v-model="formData.title"

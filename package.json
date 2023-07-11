@@ -11,9 +11,9 @@
     "@element-plus/nuxt": "^1.0.5",
     "@nuxt/devtools": "^0.4.6",
     "@nuxtjs/color-mode": "^3.3.0",
+    "@nuxtjs/tailwindcss": "^6.8.0",
     "@pinia/nuxt": "^0.4.11",
     "@tabler/icons-vue": "^2.24.0",
-    "@unocss/nuxt": "^0.53.5",
     "@unocss/reset": "^0.53.5",
     "@vueuse/core": "^10.2.1",
     "@vueuse/nuxt": "^10.2.1",
@@ -26,7 +26,7 @@
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "@types/lodash-es": "^4.17.7",
-    "@unocss/eslint-config": "^0.53.5",
+    "prettier-plugin-tailwindcss": "^0.3.0",
     "czg": "^1.7.0",
     "eslint": "^8.44.0",
     "eslint-config-prettier": "^8.8.0",
@@ -35,13 +35,15 @@
     "typescript": "^5.1.6"
   },
   "prettier": {
+    "plugins": [
+      "prettier-plugin-tailwindcss"
+    ],
     "endOfLine": "auto"
   },
   "eslintConfig": {
     "extends": [
       "@nuxtjs/eslint-config-typescript",
-      "plugin:prettier/recommended",
-      "@unocss"
+      "plugin:prettier/recommended"
     ],
     "rules": {
       "vue/no-multiple-template-root": "off",

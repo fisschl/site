@@ -1,14 +1,9 @@
 export default defineNuxtConfig({
-  vue: {
-    compilerOptions: {
-      isCustomElement: (tag) => tag.startsWith("cropper-"),
-    },
-  },
   modules: [
     "@nuxt/devtools",
     "@nuxtjs/color-mode",
     "@vueuse/nuxt",
-    "@unocss/nuxt",
+    "@nuxtjs/tailwindcss",
     "@pinia/nuxt",
     "@element-plus/nuxt",
   ],
